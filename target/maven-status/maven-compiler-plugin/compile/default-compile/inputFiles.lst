@@ -1,5 +1,12 @@
 /home/dam/Documentos/Buscaminas/src/main/java/es/nexphernandez/buscaminas/controller/abstractas/AbstractController.java
+/home/dam/Documentos/Buscaminas/src/main/java/es/nexphernandez/buscaminas/model/UsuarioServiceModel.java
+/home/dam/Documentos/Buscaminas/src/main/java/es/nexphernandez/buscaminas/controller/LoginController.java
+/home/dam/Documentos/Buscaminas/src/main/java/es/nexphernandez/buscaminas/config/ConfigManager.java
 /home/dam/Documentos/Buscaminas/src/main/java/module-info.java
+/home/dam/Documentos/Buscaminas/src/main/java/es/nexphernandez/buscaminas/model/conexion/Conexion.java
 /home/dam/Documentos/Buscaminas/src/main/java/es/nexphernandez/buscaminas/PrincipalApplication.java
 /home/dam/Documentos/Buscaminas/src/main/java/es/nexphernandez/buscaminas/controller/PlayController.java
+/home/dam/Documentos/Buscaminas/src/main/java/es/nexphernandez/buscaminas/controller/RegistrarController.java
+/home/dam/Documentos/Buscaminas/src/main/java/es/nexphernandez/buscaminas/controller/PostsController.java
 /home/dam/Documentos/Buscaminas/src/main/java/es/nexphernandez/buscaminas/model/UsuarioEntity.java
+/home/dam/Documentos/Buscaminas/src/main/java/es/nexphernandez/buscaminas/controller/TituloController.java

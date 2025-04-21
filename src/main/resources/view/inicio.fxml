@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
    prefHeight="500.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/21"
-   xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.alejandrosalazargonzalez.ahorcado.controller.InicioController">
+   xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.nexphernandez.buscaminas.controller.InicioController">
    <children>
       <Text fx:id="userText" layoutX="37.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0"
          text="User:" wrappingWidth="92.7294921875" />
