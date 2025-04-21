@@ -33,7 +33,7 @@ public abstract class AbstractController {
 
     private String pantallaAnterior;
 
-    static final String PATH_DB = "src/main/resources/es/alejandrosalazargonzalez/minado/usuarios.db";
+    static final String PATH_DB = "src/main/resources/db/usuarios.db";
 
     private UsuarioServiceModel usuarioServiceModel;
 
