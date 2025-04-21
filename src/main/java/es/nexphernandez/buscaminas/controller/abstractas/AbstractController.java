@@ -1,15 +1,24 @@
 package es.nexphernandez.buscaminas.controller.abstractas;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Properties;
 
 import es.nexphernandez.buscaminas.PrincipalApplication;
-import es.nexphernandez.buscaminas.model.UsuarioEntity;
+import es.nexphernandez.buscaminas.config.ConfigManager;
 import es.nexphernandez.buscaminas.model.UsuarioServiceModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -18,18 +27,73 @@ import javafx.stage.Stage;
  */
 public abstract class AbstractController {
 
+    private final String pathFichero = "src/main/resources/";
+    private final String ficheroStr = "idioma-";
+    private static String idiomaActual = "es";
+
+    private String pantallaAnterior;
+
+    static final String PATH_DB = "src/main/resources/es/alejandrosalazargonzalez/minado/usuarios.db";
+
     private UsuarioServiceModel usuarioServiceModel;
 
-    private static UsuarioEntity usuarioActual;
+    private Properties propertiesIdioma;
+
     /**
      * Constructor
      */
     protected AbstractController() {
-        usuarioServiceModel = new UsuarioServiceModel();
+        try {
+            usuarioServiceModel = new UsuarioServiceModel(PATH_DB);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
-     * retorna el usuarioservicemodel para poder trabajar con el
+     * setea el properties
+     * 
+     * @param properties
+     */
+    public void setpropertiesIdioma(Properties properties) {
+        propertiesIdioma = properties;
+    }
+
+    /**
+     * retorna el properties
+     * 
+     * @return Properties
+     */
+    public Properties getPropertiesIdioma() {
+        return propertiesIdioma;
+    }
+
+    public static String getIdioma() {
+        return idiomaActual;
+    }
+
+    public static void setIdioma(String idioma) {
+        idiomaActual = idioma;
+    }
+
+    /**
+     * Funcion para cargar el idioma
+     * 
+     * @param idioma a cargar
+     */
+    protected String cargarIdiomaActual() {
+        if (idiomaActual == null || idiomaActual.isEmpty()) {
+            idiomaActual = "es";
+        }
+
+        String path = pathFichero + ficheroStr + idiomaActual + ".properties";
+        ConfigManager.ConfigProperties.setPath(path);
+        return idiomaActual;
+    }
+
+    /**
+     * retorna el usuarioServiceModel
+     * 
      * @return UsuarioServiceModel
      */
     public UsuarioServiceModel getUsuarioServiceModel() {
@@ -37,33 +101,33 @@ public abstract class AbstractController {
     }
 
     /**
-     * setea al usuario actual
+     * comprueba que los textField sean correctos
      * 
-     * @param usuario a ser el actual
+     * @param campo
+     * @return true/false
      */
-    public void setUsuarioActual(UsuarioEntity usuario){
-        this.usuarioActual = usuario;
+    @FXML
+    public boolean comprobarTextField(TextField campo) {
+        if (campo.getText() == null || campo.getText().isEmpty()) {
+            return false;
+        }
+        return campo.getText() != null || !(campo.getText().isEmpty());
     }
 
     /**
-     * retorna el usuario actual
-     * @return UsuarioEntity
-     */
-    public UsuarioEntity getUsuarioActual(){
-        return usuarioActual;
-    }
-    /**
      * cambia a la pantalla indicada usando el boton que se le pasa como referencia
+     * 
      * @param botton
      * @param pantalla
      */
     @FXML
-    public void cambiarPantalla( Button botton, String pantalla){
+    public void cambiarPantalla(Button botton, String pantalla, String pantallaAnterior) {
         try {
+            this.pantallaAnterior = pantallaAnterior;
+            FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource(pantalla + ".fxml"));
             Stage stage = (Stage) botton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource(pantalla+".fxml"));
             Scene scene;
-            scene = new Scene(fxmlLoader.load(), 350, 500);
+            scene = new Scene(fxmlLoader.load(), 510, 900);
             stage.setResizable(false);
             stage.setTitle("Pantalla Princial");
             stage.setScene(scene);
@@ -72,18 +136,50 @@ public abstract class AbstractController {
             e.printStackTrace();
         }
     }
-    
-    /**
-     * comprueba que los textField sean correctos
-     * @param campo
-     * @return true/false
+
+        /**
+     * cambia a la pantalla indicada usando el boton que se le pasa como referencia
+     * 
+     * @param botton
+     * @param pantalla
      */
     @FXML
-    public boolean comprobarTextField( TextField campo){
-        if (campo.getText() == null || campo.getText().isEmpty()) {
-            return false;
+    public void cambiarPantalla(Hyperlink botton, String pantalla, String pantallaAnterior) {
+        try {
+            this.pantallaAnterior = pantallaAnterior;
+            FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource(pantalla + ".fxml"));
+            Stage stage = (Stage) botton.getScene().getWindow();
+            Scene scene;
+            scene = new Scene(fxmlLoader.load(), 510, 900);
+            stage.setResizable(false);
+            stage.setTitle("Pantalla Princial");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return true;
+    }
+
+    /**
+     * cambia a la pantalla anterior usando el boton que se le pasa como referencia
+     * 
+     * @param botton
+     * @param pantalla
+     */
+    @FXML
+    public void cambiarPantalla(Button botton) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource(pantallaAnterior + ".fxml"));
+            Stage stage = (Stage) botton.getScene().getWindow();
+            Scene scene;
+            scene = new Scene(fxmlLoader.load(), 510, 900);
+            stage.setResizable(false);
+            stage.setTitle("Pantalla Princial");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

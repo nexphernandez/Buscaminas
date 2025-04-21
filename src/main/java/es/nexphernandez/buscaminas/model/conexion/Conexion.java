@@ -5,34 +5,71 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Conexion {
-    private static final String paht_bd = "src/main/resources/db/data.db";
-    private static final File file_bd = new File(paht_bd);
+public abstract class Conexion {
+
+    private String rutaArchivoBD;
     private Connection connection;
+
     /**
-     * Constructor por defecto.
+     * Constructor vacio
      */
-    protected Conexion() {
+    protected Conexion(){}
+
+    /**
+     * Constructor con path de conexion
+     * 
+     * @param unaRutaArchivoBD ruta de la bbdd
+     * @throws SQLException error controlado
+     */
+    protected Conexion(String unaRutaArchivoBD) throws SQLException {
+        if (unaRutaArchivoBD == null || unaRutaArchivoBD.isEmpty()) {
+            throw new SQLException("El fichero es nullo o vacio");
+        }
+        File file = new File(unaRutaArchivoBD);
+        if (!file.exists()) {
+            throw new SQLException("No exise la bbdd:" + unaRutaArchivoBD);
+        }
+
+        rutaArchivoBD = unaRutaArchivoBD;
+    }
+
+    //Getters y Setters
+    public String getRutaArchivoBD() {
+        return this.rutaArchivoBD;
+    }
+
+    public Connection getConnection() {
         try {
-            if (!file_bd.exists() || !file_bd.isFile()) {
-                throw new SQLException("No existe la base de datos");
+            if (connection == null) {
+                connection = DriverManager.getConnection("jdbc:sqlite:" + rutaArchivoBD);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        return this.connection;
     }
 
     /**
-     * Crea una nueva conexion.
-     * 
-     * @return retorna la nueva conexion.
+     * Funcion que abre la conexion a la bbdd
+     * @return
+     * @throws SQLException
      */
-    protected Connection createConnection() {
-        try {
-            return DriverManager.getConnection("jdbc:sqlite:" + paht_bd);
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public Connection conectar() throws SQLException {
+        if (connection == null) {
+            connection = DriverManager.getConnection("jdbc:sqlite:" + rutaArchivoBD);
         }
-        return null;
+        return connection;
+    }
+
+    /**
+     * Funcion que cierra la conexion de bbdd
+     * @throws SQLException
+     */
+    public void cerrar() throws SQLException {
+        if (connection != null || !connection.isClosed()) {
+            connection.close();
+            connection = null;
+        }
     }
 }

@@ -10,7 +10,9 @@ import javafx.scene.control.Label;
  */
 import java.util.Random;
 
-public class PlayController {
+import es.nexphernandez.buscaminas.controller.abstractas.AbstractController;
+
+public class PlayController extends AbstractController{
 
     private static final int FILAS = 10;
     private static final int COLUMNAS = 10;

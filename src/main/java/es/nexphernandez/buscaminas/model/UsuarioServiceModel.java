@@ -1,111 +1,180 @@
+
 package es.nexphernandez.buscaminas.model;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import es.nexphernandez.buscaminas.model.conexion.Conexion;
 
 /**
- * @author nexphernandez
- * @version 1.0.0
+ * @author: alejandrosalazargonzalez
+ * @version: 1.0.0
  */
 public class UsuarioServiceModel extends Conexion {
 
     /**
-     * Constructor general.
+     * constructor vacio
      */
     public UsuarioServiceModel() {
-        super();
     }
 
     /**
-     * Inserta un nuevo usuario en la base de datos.
-     * 
-     * @param user usuraio a insertar.
-     * @return retorna true si el usuario a sido insertado.
+     * Constructor completo con la ruta de la base de datos
+     *
+     * @param unaRutaArchivoBD
+     * @throws SQLException
      */
-    public boolean createUser(UsuarioEntity user) {
-        String query = "INSERT INTO users(name, password) VALUES (?, ?)";
-        try (Connection connection = createConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getPassword());
-            int rowsAffected = preparedStatement.executeUpdate();
-            return rowsAffected > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } 
-        return false;
+    public UsuarioServiceModel(String unaRutaArchivoBD) throws SQLException {
+        super(unaRutaArchivoBD);
     }
 
     /**
-     * Busca un usuario en la base de datos.
+     * Saca todos los usuarios
      * 
-     * @param user usuario a buscar.
-     * @return retorna el usuario buscado.
+     * @return ArrayList<UsuarioEntity>
+     * @throws SQLException
      */
-    public UsuarioEntity readUser(UsuarioEntity user) {
-        String query = "SELECT name, password, answers, hits FROM users WHERE name = ? AND password = ?";
-        try (Connection connection = createConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getPassword());
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    String name = resultSet.getString("name");
-                    String password = resultSet.getString("password");
-                    return new UsuarioEntity(name, password);
-                }
+    public ArrayList<UsuarioEntity> obtenerUsarios() throws SQLException {
+        String sql = "SELECT * FROM Usuario";
+        return leerSql(sql);
+    }
+
+    /**
+     * Obtiene todos los usuarios por su email
+     * 
+     * @param email del usuario
+     * @return UsuarioEntity
+     */
+    public UsuarioEntity obtenerUsuarioPorEmail(String email) {
+        try {
+            String sql = "SELECT * FROM Usuario " + "where email='" + email + "'";
+            ArrayList<UsuarioEntity> usuarios = leerSql(sql);
+            if (usuarios.isEmpty()) {
+                return null;
             }
-        } catch (SQLException e) {
+            return usuarios.get(0);
+        } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
+
     }
 
     /**
-     * Actualiza un usuario de la base de datos.
+     * Obtiene todos los usuarios por su usuario
      * 
-     * @param user       usuario a actualizar.
-     * @param updateUser usuario actualizado.
-     * @return retorna true si el usuario fue actualizado
+     * @param usuario a buscar
+     * @return UsuarioEntity
      */
-    public boolean updateUser(UsuarioEntity user, UsuarioEntity updateUser) {
-        String query = "UPDATE users SET name = ?, password = ?, answers = ?, hits = ? WHERE name = ? AND password = ? ";
-        try (Connection connection = createConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, updateUser.getName());
-            preparedStatement.setString(2, updateUser.getPassword());
-            preparedStatement.setString(5, user.getName());
-            preparedStatement.setString(6, user.getPassword());
-            int rowsAffected = preparedStatement.executeUpdate();
-            return rowsAffected > 0;
-        } catch (SQLException e) {
+    public UsuarioEntity obtenerUsuarioPorUsuario(String usuario) {
+        try {
+            String sql = "SELECT * FROM Usuario " + "where nombreUsuario='" + usuario + "'";
+            ArrayList<UsuarioEntity> usuarios = leerSql(sql);
+            if (usuarios.isEmpty()) {
+                return null;
+            }
+            return usuarios.get(0);
+        } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return false;
+
     }
 
     /**
-     * Elimina un usurio de la base de datos;
+     * aniade un usuario a la base de datos
      * 
-     * @param user usuario a eliminar.
-     * @return retorna true si el usuario fue eliminado.
+     * @param usuario a agregar
+     * @return true/false
+     * @throws SQLException
      */
-    public boolean deleteUser(UsuarioEntity user) {
-        String query = "DELETE FROM users WHERE name = ? AND password = ?";
-        try (Connection connection = createConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getPassword());
-            int rowsAffected = preparedStatement.executeUpdate();
-            return rowsAffected > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public boolean addUsuario(UsuarioEntity usuario) throws SQLException {
+        if (usuario == null) {
+            return false;
         }
-        return false;
+        String sql = "INSERT INTO Usuario (nombreUsuario, email, nombre, contrasenia) VALUES (?, ?, ?, ?)";
+        return ejecutarUpdate(sql, usuario);
     }
 
+    /**
+     * aniade un usuario a la base de datos
+     * 
+     * @param usuario a agregar
+     * @return true/false
+     * @throws SQLException
+     */
+    public boolean eliminarUsuario(UsuarioEntity usuario) throws SQLException {
+        if (usuario == null) {
+            return false;
+        }
+        String sql = "Delete from usuarios where ";
+        return ejecutarUpdate(sql, usuario);
+    }
+
+    /**
+     * Ejecuta la sencuencia sql introducida
+     *
+     * @param sql a ejecutar
+     * @return ArrayList<UsuarioEntity>
+     * @throws SQLException
+     */
+    public ArrayList<UsuarioEntity> leerSql(String sql) throws SQLException {
+        ArrayList<UsuarioEntity> usuarios = new ArrayList<>();
+        try {
+            PreparedStatement sentencia = getConnection().prepareStatement(sql);
+            ResultSet resultado = sentencia.executeQuery();
+
+            while (resultado.next()) {
+                String usuarioStr = resultado.getString("nombreUsuario");
+                String nombreStr = resultado.getString("nombre");
+                String contraseniaStr = resultado.getString("contrasenia");
+                String emailStr = resultado.getString("email");
+                UsuarioEntity usuarioModel = new UsuarioEntity(usuarioStr, emailStr, nombreStr, contraseniaStr);
+                usuarios.add(usuarioModel);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cerrar();
+        }
+        return usuarios;
+    }
+
+    /**
+     * modifica la base de datos segun el sql insertado
+     * 
+     * @param sql
+     * @param usuario
+     * @return
+     * @throws SQLException
+     */
+    public boolean ejecutarUpdate(String sql, UsuarioEntity usuario) throws SQLException {
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
+            stmt.setString(1, usuario.getUsuario());
+            stmt.setString(2, usuario.getEmail());
+            stmt.setString(3, usuario.getNombre());
+            stmt.setString(4, usuario.getContrasenia());
+            stmt.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            cerrar();
+        }
+    }
+
+    public boolean eliminar(String sql) throws SQLException{
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
+            int filas = stmt.executeUpdate(sql);
+            return filas > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally{
+            cerrar();
+        }
+    }
 }

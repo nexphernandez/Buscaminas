@@ -1,48 +1,79 @@
+
 package es.nexphernandez.buscaminas.model;
 
 import java.util.Objects;
 
 /**
- * @author nexphernandez
- * @version 1.0.0
+ *   @author: alejandrosalazargonzalez
+ *   @version: 1.0.0
  */
 public class UsuarioEntity {
 
-    private String name;
-    private String password;
+    private String usuario;
+    private String email;
+    private String nombre;
+    private String contrasenia;
 
     /**
-     * Constructor por defecto.
+     * Constructor vacio
      */
     public UsuarioEntity() {
     }
 
     /**
-     * Constructor solo con nombre y contrasenia.
-     * @param name     nombre del usuario.
-     * @param password contrasenia del usuario.
+     * Constructor completo
+     *
+     * @param usuario     del usuario
+     * @param email       del usuario
+     * @param nombre      del usuario
+     * @param contrasenia del usuario
+     * @throws Exception
      */
-    public UsuarioEntity(String name, String password) {
-        this.name = name;
-        this.password = password;
+    public UsuarioEntity(String usuario, String email, String nombre, String contrasenia) throws ExceptionInInitializerError{
+        if (!email.contains("@") || !email.contains(".") ) {
+            throw new ExceptionInInitializerError("El email debe tener un formato correcto");
+        }
+        this.usuario = usuario;
+        this.email = email;
+        this.nombre = nombre;
+        this.contrasenia = contrasenia;
     }
 
-    public String getName() {
-        return this.name;
+    //Getters y Setters
+    public String getUsuario(){
+        return this.usuario;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsuario(String usuario){
+        this.usuario = usuario;
     }
 
-    public String getPassword() {
-        return this.password;
+    public String getEmail() {
+        return this.email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEmail(String email) throws ExceptionInInitializerError {
+        if (!email.contains("@") || !email.contains(".com") ) {
+            throw new ExceptionInInitializerError("El email debe tener un formato correcto");
+        }
+        this.email = email;
     }
 
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getContrasenia() {
+        return this.contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -51,20 +82,21 @@ public class UsuarioEntity {
         if (!(o instanceof UsuarioEntity)) {
             return false;
         }
-        UsuarioEntity user = (UsuarioEntity) o;
-        return Objects.equals(name, user.name);
+        UsuarioEntity usuarioModel = (UsuarioEntity) o;
+        return Objects.equals(email, usuarioModel.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(email);
     }
 
     @Override
     public String toString() {
-        return "{" +
-                " name='" + getName() + "'" +
-                ", password='" + getPassword() + "'" +
+        return "{" + "usuario" + getUsuario() +
+                ", email=" + getEmail() +
+                ", nombre=" + getNombre() +
+                ", contrasenia=" + getContrasenia() +
                 "}";
     }
 
