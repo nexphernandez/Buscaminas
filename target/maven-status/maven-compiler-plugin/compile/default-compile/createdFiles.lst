@@ -1,4 +1,5 @@
-es\nexphernandez\buscaminas\model\UsuarioEntity.class
-es\nexphernandez\buscaminas\PrincipalApplication.class
+es/nexphernandez/buscaminas/PrincipalApplication.class
 module-info.class
-es\nexphernandez\buscaminas\controller\InicioController.class
+es/nexphernandez/buscaminas/model/UsuarioEntity.class
+es/nexphernandez/buscaminas/controller/abstractas/AbstractController.class
+es/nexphernandez/buscaminas/controller/PlayController.class

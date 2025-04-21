@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" spacing="30.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@style.css" fx:controller="com.quiz.controller.ProfileController">
+   <children>
+      <Text fx:id="textUser" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" />
+      <TextField fx:id="textFieldUser" maxWidth="200.0" promptText="Nuevo nombre" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" />
+      <PasswordField fx:id="passwordFieldPassword" maxWidth="200.0" promptText="Nueva contraseña" />
+      <Text fx:id="textMessage" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Button fx:id="buttonUpdate" mnemonicParsing="false" onAction="#buttonUpdateClick" text="Actualizar Datos" />
+      <Button fx:id="buttonClose" mnemonicParsing="false" onAction="#buttonCloseClick" text="Cerrar Sesion" />
+      <Button fx:id="buttonReturn" mnemonicParsing="false" onAction="#buttonReturnClick" text="Volver atras" />
+      <Button fx:id="buttonDelete" mnemonicParsing="false" onAction="#buttonDeleteClick" text="Eliminar Cuenta" />
+   </children>
+   <padding>
+      <Insets top="40.0" />
+   </padding>
+</VBox>

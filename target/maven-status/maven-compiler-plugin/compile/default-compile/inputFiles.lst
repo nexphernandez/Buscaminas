@@ -1,4 +1,5 @@
-C:\Users\nico\Documents\Buscaminas\src\main\java\es\nexphernandez\buscaminas\model\UsuarioEntity.java
-C:\Users\nico\Documents\Buscaminas\src\main\java\es\nexphernandez\buscaminas\PrincipalApplication.java
-C:\Users\nico\Documents\Buscaminas\src\main\java\module-info.java
-C:\Users\nico\Documents\Buscaminas\src\main\java\es\nexphernandez\buscaminas\controller\InicioController.java
+/home/dam/Documentos/Buscaminas/src/main/java/es/nexphernandez/buscaminas/controller/abstractas/AbstractController.java
+/home/dam/Documentos/Buscaminas/src/main/java/module-info.java
+/home/dam/Documentos/Buscaminas/src/main/java/es/nexphernandez/buscaminas/PrincipalApplication.java
+/home/dam/Documentos/Buscaminas/src/main/java/es/nexphernandez/buscaminas/controller/PlayController.java
+/home/dam/Documentos/Buscaminas/src/main/java/es/nexphernandez/buscaminas/model/UsuarioEntity.java

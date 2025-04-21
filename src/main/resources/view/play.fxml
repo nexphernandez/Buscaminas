@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" prefHeight="400" prefWidth="400" fx:controller="es.nexphernandez.buscaminas.controller.PlayController">
+    <top>
+        <Label text="Buscaminas" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+    </top>
+    <center>
+        <VBox spacing="10" alignment="CENTER">
+            <GridPane fx:id="grid" hgap="2" vgap="2" />
+            <Label fx:id="mensajeLabel" text="" style="-fx-font-size: 16px;" />
+            <Button fx:id="nuevoJuegoBtn" text="Nuevo Juego" onAction="#nuevoJuego" />
+        </VBox>
+    </center>
+</BorderPane>

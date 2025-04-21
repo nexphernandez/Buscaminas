@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" spacing="40.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@style.css" fx:controller="com.quiz.controller.CreateController">
+   <children>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario" />
+      <TextField fx:id="textFieldUser" maxWidth="200.0" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" />
+      <PasswordField fx:id="passwordFieldPassword" maxWidth="200.0" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Repetir contraseña" />
+      <PasswordField fx:id="passwordFieldRepeatPassword" maxWidth="200.0" />
+      <Text fx:id="textMessage" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Button fx:id="buttonAccept" mnemonicParsing="false" onAction="#buttonAcceptClick" text="Aceptar" />
+      <Button fx:id="buttonStart" mnemonicParsing="false" onAction="#buttonStartClick" text="Iniciar" />
+   </children>
+   <padding>
+      <Insets top="40.0" />
+   </padding>
+</VBox>
