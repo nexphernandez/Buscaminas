@@ -6,15 +6,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion {
-    private static final String DATABASE_PATH = "src/main/resources/db/data.db";
-    private static final File DATABASE_FILE = new File(DATABASE_PATH);
-
+    private static final String paht_bd = "src/main/resources/db/data.db";
+    private static final File file_bd = new File(paht_bd);
+    private Connection connection;
     /**
      * Constructor por defecto.
      */
     protected Conexion() {
         try {
-            if (!DATABASE_FILE.exists() || !DATABASE_FILE.isFile()) {
+            if (!file_bd.exists() || !file_bd.isFile()) {
                 throw new SQLException("No existe la base de datos");
             }
         } catch (SQLException e) {
@@ -29,7 +29,7 @@ public class Conexion {
      */
     protected Connection createConnection() {
         try {
-            return DriverManager.getConnection("jdbc:sqlite:" + DATABASE_PATH);
+            return DriverManager.getConnection("jdbc:sqlite:" + paht_bd);
         } catch (SQLException e) {
             e.printStackTrace();
         }

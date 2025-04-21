@@ -32,7 +32,7 @@ public class StartController extends AbstractController {
      */
     @FXML
     public void buttonStartClick() {
-    if (!validateCredentials()) {
+    if (!validarCredenciales()) {
         textMessage.setText("Credenciales invalidas");
         return;
     }
@@ -44,7 +44,8 @@ public class StartController extends AbstractController {
         return;
     }
     textMessage.setText("");
-    levelScreen(buttonStart);
+    setUsuarioActual(startUser);
+    cambiarPantalla(buttonStart, "level");
     }
 
     /**
@@ -52,7 +53,7 @@ public class StartController extends AbstractController {
      */
     @FXML
     public void buttonCreateClick() {
-        createScreen(buttonCreate);
+        cambiarPantalla(buttonCreate, "create");
     }
 
     /**
@@ -60,7 +61,7 @@ public class StartController extends AbstractController {
      * 
      * @return retorna true si estas son validas.
      */
-    private boolean validateCredentials() {
+    private boolean validarCredenciales() {
         return (textFieldUser != null && textFieldUser.getText() != null && !textFieldUser.getText().trim().isBlank() &&
                 passwordFieldPassword != null && passwordFieldPassword.getText() != null
                 && !passwordFieldPassword.getText().trim().isBlank());

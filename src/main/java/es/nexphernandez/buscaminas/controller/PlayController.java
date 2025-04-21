@@ -4,14 +4,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
-
+/**
+ * @author nexphernandez
+ * @version 1.0.0
+ */
 import java.util.Random;
 
 public class PlayController {
 
     private static final int FILAS = 10;
     private static final int COLUMNAS = 10;
-    private static final int MINAS = 10; // Cantidad de minas en el tablero
+    private static final int MINAS = 10; 
     
     @FXML
     private GridPane grid;
@@ -26,7 +29,7 @@ public class PlayController {
 
     @FXML
     void initialize() {
-        crearTablero(FILAS, COLUMNAS); // Crea un tablero de 10x10
+        crearTablero(FILAS, COLUMNAS); 
     }
 
     @FXML
@@ -36,7 +39,7 @@ public class PlayController {
     }
 
     private void crearTablero(int filas, int columnas) {
-        grid.getChildren().clear(); // Limpia el grid antes de crear uno nuevo
+        grid.getChildren().clear(); 
         tablero = new int[filas][columnas];
         colocarMinas(MINAS);
         contarMinasAlrededor();
@@ -61,43 +64,42 @@ public class PlayController {
             do {
                 fila = random.nextInt(FILAS);
                 col = random.nextInt(COLUMNAS);
-            } while (tablero[fila][col] == -1); // Asegúrate de que no haya una mina ya allí
-            tablero[fila][col] = -1; // Usa -1 para representar una mina
+            } while (tablero[fila][col] == -1); 
+            tablero[fila][col] = -1; 
         }
     }
 
     private void contarMinasAlrededor() {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
-                if (tablero[i][j] == -1) continue; // Si es una mina, la saltamos
+                if (tablero[i][j] == -1) continue; 
                 int contador = 0;
 
-                // Verifica las celdas adyacentes
+               
                 for (int x = -1; x <= 1; x++) {
                     for (int y = -1; y <= 1; y++) {
-                        if (x == 0 && y == 0) continue; // Ignora la celda actual
+                        if (x == 0 && y == 0) continue; 
                         int nuevaFila = i + x;
                         int nuevaCol = j + y;
-                        // Verificar si la nueva posición está dentro del tablero
+                        
                         if (nuevaFila >= 0 && nuevaFila < tablero.length && nuevaCol >= 0 && nuevaCol < tablero[0].length) {
                             if (tablero[nuevaFila][nuevaCol] == -1) contador++;
                         }
                     }
                 }
-                tablero[i][j] = contador; // Guarda el conteo de minas
+                tablero[i][j] = contador; 
             }
         }
     }
 
     private void manejarBoton(Button btn, int fila, int columna) {
-        // Aquí va la lógica para descubrir la casilla
-        btn.setDisable(true); // Desactiva el botón después de hacer clic
+        btn.setDisable(true);
         if (tablero[fila][columna] == -1) {
-            btn.setText("💣"); // Representar la mina
-            mensajeLabel.setText("¡Perdiste!"); // Mensaje de pérdida
-            // Aquí podrías desactivar todos los botones o revelar todas las minas
+            btn.setText("💣"); 
+            mensajeLabel.setText("¡Perdiste!"); 
+            
         } else {
-            btn.setText(String.valueOf(tablero[fila][columna])); // Muestra el número de minas adyacentes
+            btn.setText(String.valueOf(tablero[fila][columna])); 
         }
     }
 }

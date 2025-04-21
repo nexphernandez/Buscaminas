@@ -47,7 +47,7 @@ public class LevelController extends AbstractController {
      */
     @FXML
     public void buttonPlayClick() {
-        playScreen(buttonPlay);
+        cambiarPantalla(buttonPlay, "play");
     }
 
     /**
@@ -55,7 +55,7 @@ public class LevelController extends AbstractController {
      */
     @FXML
     public void buttonProfileClick() {
-        profileScreen(buttonProfile);
+        cambiarPantalla(buttonProfile, "profile");
     }
 
     /**
@@ -63,7 +63,7 @@ public class LevelController extends AbstractController {
      */
     @FXML
     public void buttonStartClick() {
-        startScreen(buttonStart);
+        cambiarPantalla(buttonStart, "start");
     }
 
 }

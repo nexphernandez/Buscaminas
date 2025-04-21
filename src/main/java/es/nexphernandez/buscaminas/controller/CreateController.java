@@ -55,7 +55,7 @@ public class CreateController extends AbstractController {
             alert.setContentText("Sesión creada con éxito. Redirigiendo a la pantalla de inicio...");
             alert.showAndWait();
 
-            startScreen(buttonStart);
+            cambiarPantalla(buttonStart, "start");
             return;
         }
         textMessage.setText("Usuario no pudo crearse");
@@ -66,7 +66,7 @@ public class CreateController extends AbstractController {
      */
     @FXML
     public void buttonStartClick() {
-        startScreen(buttonStart);
+        cambiarPantalla(buttonStart, "start");
     }
 
     /**

@@ -61,7 +61,7 @@ public class ProfileController extends AbstractController {
      */
     @FXML
     public void buttonCloseClick() {
-        startScreen(buttonClose);
+        cambiarPantalla(buttonClose, "start");
     }
 
     /**
@@ -69,7 +69,7 @@ public class ProfileController extends AbstractController {
      */
     @FXML
     public void buttonReturnClick() {
-        levelScreen(buttonReturn);
+        cambiarPantalla(buttonReturn, "level");
     }
 
     /**
@@ -77,21 +77,16 @@ public class ProfileController extends AbstractController {
      */
     @FXML
     public void buttonDeleteClick() {
-        // Crear un Alert de confirmación
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmar eliminación");
         alert.setHeaderText("¿Estás seguro de que deseas eliminar tu cuenta?");
         alert.setContentText("Esta acción no se puede deshacer.");
-
-        // Mostrar el Alert y esperar la respuesta del usuario
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
-                // Si el usuario confirma, eliminar la cuenta
                 UsuarioServiceModel userModel = new UsuarioServiceModel();
                 userModel.deleteUser(SessionModel.getUser());
-                startScreen(buttonDelete); // Regresar a la pantalla inicial
+                startScreen(buttonDelete); 
             } else {
-                // Si el usuario cancela, no hacer nada
                 alert.close();
             }
         });
@@ -99,7 +94,6 @@ public class ProfileController extends AbstractController {
 
     /**
      * Valida las credenciales.
-     * 
      * @return retorna true si estas son validas.
      */
     private boolean validateCredentials() {

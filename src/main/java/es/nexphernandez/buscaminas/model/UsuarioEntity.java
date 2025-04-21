@@ -10,8 +10,6 @@ public class UsuarioEntity {
 
     private String name;
     private String password;
-    private Integer answers;
-    private Integer hits;
 
     /**
      * Constructor por defecto.
@@ -21,28 +19,12 @@ public class UsuarioEntity {
 
     /**
      * Constructor solo con nombre y contrasenia.
-     * 
      * @param name     nombre del usuario.
      * @param password contrasenia del usuario.
      */
     public UsuarioEntity(String name, String password) {
         this.name = name;
         this.password = password;
-    }
-
-    /**
-     * Constructor general.
-     * 
-     * @param name     nombre del usuario.
-     * @param password contrasenia del usuario.
-     * @param answers  respuestas del usuario.
-     * @param hits aciertos del usuario.
-     */
-    public UsuarioEntity(String name, String password, Integer answers, Integer hits) {
-        this.name = name;
-        this.password = password;
-        this.answers = answers;
-        this.hits = hits;
     }
 
     public String getName() {
@@ -61,21 +43,6 @@ public class UsuarioEntity {
         this.password = password;
     }
 
-    public Integer getAnswers() {
-        return this.answers;
-    }
-
-    public void setAnswers(Integer answers) {
-        this.answers = answers;
-    }
-
-    public Integer getHits() {
-        return this.hits;
-    }
-
-    public void setHits(Integer hits) {
-        this.hits = hits;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -98,8 +65,6 @@ public class UsuarioEntity {
         return "{" +
                 " name='" + getName() + "'" +
                 ", password='" + getPassword() + "'" +
-                ", answers='" + getAnswers() + "'" +
-                ", accuracy='" + getHits() + "'" +
                 "}";
     }
 

@@ -36,7 +36,7 @@ public class UsuarioServiceModel extends Conexion {
             return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } 
         return false;
     }
 
@@ -56,9 +56,7 @@ public class UsuarioServiceModel extends Conexion {
                 if (resultSet.next()) {
                     String name = resultSet.getString("name");
                     String password = resultSet.getString("password");
-                    Integer answers = resultSet.getInt("answers");
-                    Integer hits = resultSet.getInt("hits");
-                    return new UsuarioEntity(name, password, answers, hits);
+                    return new UsuarioEntity(name, password);
                 }
             }
         } catch (SQLException e) {
@@ -80,8 +78,6 @@ public class UsuarioServiceModel extends Conexion {
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, updateUser.getName());
             preparedStatement.setString(2, updateUser.getPassword());
-            preparedStatement.setInt(3, updateUser.getAnswers());
-            preparedStatement.setInt(4, updateUser.getHits());
             preparedStatement.setString(5, user.getName());
             preparedStatement.setString(6, user.getPassword());
             int rowsAffected = preparedStatement.executeUpdate();
