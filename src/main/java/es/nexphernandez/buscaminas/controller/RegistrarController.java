@@ -58,7 +58,7 @@ public class RegistrarController extends AbstractController {
      * mete al usuario en la bbdd
      */
     @FXML
-    private void onButtonAceptarRegClick() {
+    private void guardarUsuarioOnClick() {
         if (!comprobarRegistrar()) {
             return;
         }
@@ -81,7 +81,7 @@ public class RegistrarController extends AbstractController {
             e.printStackTrace();
             errorText.setText("error no controlado");
         }
-        registrarToLoginOnClick();
+        regresarOnClick();
     }
 
     /**
@@ -126,10 +126,10 @@ public class RegistrarController extends AbstractController {
     }
 
     /**
-     * vuelve a log in
+     * vuelve a login
      */
     @FXML
-    private void registrarToLoginOnClick() {
+    private void regresarOnClick() {
         cambiarPantalla(regresarButton, "app-init", "registrar");
     }
 
@@ -138,9 +138,7 @@ public class RegistrarController extends AbstractController {
      */
     public void cambiarIdiomaRegistrar() {
 
-        usuarioTextField.setPromptText(ConfigManager.ConfigProperties.getProperty("usuarioTextField"));
-        nombreText.setText(ConfigManager.ConfigProperties.getProperty("nombreText"));
-        nombreTextField.setPromptText(ConfigManager.ConfigProperties.getProperty("nombreTextField"));
+       
 
     }
 
