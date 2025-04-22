@@ -3,7 +3,6 @@ package es.nexphernandez.buscaminas.controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import es.nexphernandez.buscaminas.config.ConfigManager;
 import es.nexphernandez.buscaminas.controller.abstractas.AbstractController;
 import es.nexphernandez.buscaminas.model.UsuarioEntity;
 import javafx.fxml.FXML;
@@ -13,8 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 /**
- * @author: alejandrosalazargonzalez
- * @version: 1.0.0
+ * @author nexphernandez
+ * @version 1.0.0
  */
 public class RegistrarController extends AbstractController {
 

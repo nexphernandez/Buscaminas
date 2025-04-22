@@ -14,8 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 /**
- * @author: alejandrosalazargonzalez
- * @version: 1.0.0
+ * @author nexphernandez
+ * @version 1.0.0
  */
 public class LoginController extends AbstractController {
 

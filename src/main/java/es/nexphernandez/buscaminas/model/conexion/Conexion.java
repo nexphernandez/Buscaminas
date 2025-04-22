@@ -4,7 +4,10 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+/**
+ * @author nexphernandez
+ * @version 1.0.0
+ */
 public abstract class Conexion {
 
     private String rutaArchivoBD;

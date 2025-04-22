@@ -7,6 +7,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
+/**
+ * @author nexphernandez
+ * @version 1.0.0
+ */
 public class InicioController extends AbstractController{
 
     @FXML

@@ -4,8 +4,8 @@ package es.nexphernandez.buscaminas.model;
 import java.util.Objects;
 
 /**
- *   @author: alejandrosalazargonzalez
- *   @version: 1.0.0
+ * @author nexphernandez
+ * @version 1.0.0
  */
 public class UsuarioEntity {
 

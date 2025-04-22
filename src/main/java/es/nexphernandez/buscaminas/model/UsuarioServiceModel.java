@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import es.nexphernandez.buscaminas.model.conexion.Conexion;
 
 /**
- * @author: alejandrosalazargonzalez
- * @version: 1.0.0
+ * @author nexphernandez
+ * @version 1.0.0
  */
 public class UsuarioServiceModel extends Conexion {
 

@@ -25,6 +25,9 @@ public class PlayController extends AbstractController{
     private Button nuevoJuegoBtn;
 
     @FXML
+    private Button atrasButon;
+
+    @FXML
     private Label mensajeLabel;
 
     private int[][] tablero;
@@ -38,6 +41,11 @@ public class PlayController extends AbstractController{
     void nuevoJuego() {
         mensajeLabel.setText("Nuevo juego iniciado!");
         crearTablero(FILAS, COLUMNAS);
+    }
+
+    @FXML
+    protected void onAtrasClick(){
+        cambiarPantalla(atrasButon, "inicio", "play");
     }
 
     private void crearTablero(int filas, int columnas) {
@@ -104,4 +112,6 @@ public class PlayController extends AbstractController{
             btn.setText(String.valueOf(tablero[fila][columna])); 
         }
     }
+    
+
 }
