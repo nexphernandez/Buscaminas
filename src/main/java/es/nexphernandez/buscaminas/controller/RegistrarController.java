@@ -8,8 +8,9 @@ import es.nexphernandez.buscaminas.controller.abstractas.AbstractController;
 import es.nexphernandez.buscaminas.model.UsuarioEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 /**
  * @author: alejandrosalazargonzalez
@@ -18,37 +19,35 @@ import javafx.scene.control.TextField;
 public class RegistrarController extends AbstractController {
 
     @FXML
-    public Label registrarText;
+    public Text userText;
     @FXML
-    public Label usuarioText;
+    public Text nombreText;
     @FXML
     private TextField usuarioTextField;
     @FXML
-    public Label nombreText;
-    @FXML
     private TextField nombreTextField;
     @FXML
-    public Label contraseniaText;
+    public Text emailText1;
     @FXML
-    private TextField contraseniaTextfield;
+    private TextField emailTextField1;
     @FXML
-    public Label contraseniaText2;
+    public Text emailText11;
     @FXML
-    private TextField contraseniaTextfield2;
+    private TextField emailTextField11;
     @FXML
-    public Label correoText;
+    public Text nivelText1;
     @FXML
-    private TextField correoTextField;
+    private PasswordField passwordField;
     @FXML
-    public Label correoText2;
+    public Text nivelText;
     @FXML
-    private TextField correoTextField2;
+    public PasswordField passwordField2;
     @FXML
-    private Label errorText;
+    private Button guardarButton;
     @FXML
-    private Button buttonAtras;
+    public Button regresarButton;
     @FXML
-    public Button buttonAceptarRegistrar;
+    private Text errorText;
 
     @FXML
     public void initialize() {
@@ -64,8 +63,8 @@ public class RegistrarController extends AbstractController {
             return;
         }
 
-        UsuarioEntity nuevoUsuario = new UsuarioEntity(usuarioTextField.getText(), correoTextField.getText(),
-                nombreTextField.getText(), contraseniaTextfield.getText());
+        UsuarioEntity nuevoUsuario = new UsuarioEntity(usuarioTextField.getText(), emailTextField1.getText(),
+                nombreTextField.getText(), passwordField.getText());
         ArrayList<UsuarioEntity> usuarioEntityList;
         try {
             usuarioEntityList = getUsuarioServiceModel().obtenerUsarios();
@@ -99,27 +98,27 @@ public class RegistrarController extends AbstractController {
             errorText.setText("Nombre no puede estar vacio");
             return false;
         }
-        if (!comprobarTextField(contraseniaTextfield)) {
+        if (!comprobarTextField(passwordField)) {
             errorText.setText("Contrasenia no puede estar vacio");
             return false;
         }
-        if (!comprobarTextField(contraseniaTextfield2)) {
+        if (!comprobarTextField(passwordField2)) {
             errorText.setText("Repetir contrasenia no puede estar vacio");
             return false;
         }
-        if (!contraseniaTextfield.getText().equals(contraseniaTextfield2.getText())) {
+        if (!passwordField.getText().equals(passwordField2.getText())) {
             errorText.setText("La contrasenia repetida debe ser igual");
             return false;
         }
-        if (!comprobarTextField(correoTextField)) {
+        if (!comprobarTextField(emailTextField1)) {
             errorText.setText("El correo no puede estar vacio");
             return false;
         }
-        if (!comprobarTextField(correoTextField2)) {
+        if (!comprobarTextField(emailTextField11)) {
             errorText.setText("Correo repetir de los valores puede estar vacio");
             return false;
         }
-        if (!correoTextField.getText().equals(correoTextField2.getText())) {
+        if (!emailTextField1.getText().equals(emailTextField11.getText())) {
             errorText.setText("Los correos deben ser iguales");
             return false;
         }
@@ -131,26 +130,18 @@ public class RegistrarController extends AbstractController {
      */
     @FXML
     private void registrarToLoginOnClick() {
-        cambiarPantalla(buttonAtras, "app-init", "registrar");
+        cambiarPantalla(regresarButton, "app-init", "registrar");
     }
 
     /**
      * cambiar idioma Registrar
      */
     public void cambiarIdiomaRegistrar() {
-        registrarText.setText(ConfigManager.ConfigProperties.getProperty("registrarText"));
-        usuarioText.setText(ConfigManager.ConfigProperties.getProperty("usuarioText"));
+
         usuarioTextField.setPromptText(ConfigManager.ConfigProperties.getProperty("usuarioTextField"));
         nombreText.setText(ConfigManager.ConfigProperties.getProperty("nombreText"));
         nombreTextField.setPromptText(ConfigManager.ConfigProperties.getProperty("nombreTextField"));
-        contraseniaText2.setText(ConfigManager.ConfigProperties.getProperty("contraseniaText2"));
-        contraseniaTextfield2.setPromptText(ConfigManager.ConfigProperties.getProperty("contraseniaTextfield2"));
-        correoText.setText(ConfigManager.ConfigProperties.getProperty("correoText"));
-        correoTextField.setPromptText(ConfigManager.ConfigProperties.getProperty("correoTextField"));
-        correoText2.setText(ConfigManager.ConfigProperties.getProperty("correoText2"));
-        correoTextField2.setPromptText(ConfigManager.ConfigProperties.getProperty("correoTextField2"));
-        buttonAceptarRegistrar.setText(ConfigManager.ConfigProperties.getProperty("buttonAceptarRegistrar"));
-        buttonAtras.setText(ConfigManager.ConfigProperties.getProperty("buttonAtras"));
+
     }
 
 }

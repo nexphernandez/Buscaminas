@@ -6,29 +6,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-   prefHeight="500.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/21"
-   xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.nexphernandez.buscaminas.controller.Registrar">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.nexphernandez.buscaminas.controller.RegistrarController">
    <children>
-      <Text fx:id="userText" layoutX="37.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0"
-         text="User:" wrappingWidth="92.7294921875" />
+      <Text fx:id="userText" layoutX="37.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User:" wrappingWidth="92.7294921875" />
       <TextField fx:id="userTextField" layoutX="142.0" layoutY="70.0" promptText="User" />
-      <Text fx:id="emailText1" layoutX="37.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0"
-         text="Email:" wrappingWidth="92.7294921875" />
+      <Text fx:id="emailText1" layoutX="37.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" wrappingWidth="92.7294921875" />
       <TextField fx:id="emailTextField1" layoutX="142.0" layoutY="114.0" promptText="User/Email" />
-      <Text fx:id="emailText11" layoutX="37.0" layoutY="175.0" strokeType="OUTSIDE"
-         strokeWidth="0.0" text="Repetir Email:" wrappingWidth="92.7294921875" />
+      <Text fx:id="emailText11" layoutX="37.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Repetir Email:" wrappingWidth="92.7294921875" />
       <TextField fx:id="emailTextField11" layoutX="142.0" layoutY="158.0" promptText="user/Email" />
-      <Text fx:id="nivelText1" layoutX="37.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0"
-         text="Password:" wrappingWidth="92.7294921875" />
-      <PasswordField fx:id="passwordField" layoutX="142.0" layoutY="202.0" promptText="Password" />
-      <Text fx:id="nivelText" layoutX="37.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0"
-         text="Repetir Password:" wrappingWidth="92.7294921875" />
-      <PasswordField fx:id="passwordField2" layoutX="142.0" layoutY="246.0" promptText="Password" />
-      <Button fx:id="guardarButton" layoutX="75.0" layoutY="384.0" mnemonicParsing="false"
-         onAction="#guardarUsuarioOnClick" prefHeight="24.0" prefWidth="200.0" text="Guardar" />
-      <Button fx:id="regresarButton" layoutX="75.0" layoutY="436.0" mnemonicParsing="false"
-         onAction="#regresarOnClick" prefHeight="24.0" prefWidth="200.0" text="Regresar" />
+      <Text fx:id="nivelText1" layoutX="37.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" wrappingWidth="92.7294921875" />
+      <PasswordField fx:id="passwordField" layoutX="142.0" layoutY="250.0" promptText="Password" />
+      <Text fx:id="nivelText" layoutX="37.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Repetir Password:" wrappingWidth="92.7294921875" />
+      <PasswordField fx:id="passwordField2" layoutX="142.0" layoutY="296.0" promptText="Password" />
+      <Button fx:id="guardarButton" layoutX="75.0" layoutY="384.0" mnemonicParsing="false" onAction="#guardarUsuarioOnClick" prefHeight="24.0" prefWidth="200.0" text="Guardar" />
+      <Button fx:id="regresarButton" layoutX="75.0" layoutY="436.0" mnemonicParsing="false" onAction="#regresarOnClick" prefHeight="24.0" prefWidth="200.0" text="Regresar" />
       <Text fx:id="errorText" layoutX="131.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="nombreText" layoutX="37.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" wrappingWidth="92.7294921875" />
+      <TextField fx:id="nombreTextField" layoutX="142.0" layoutY="205.0" promptText="nombre" />
    </children>
 </AnchorPane>

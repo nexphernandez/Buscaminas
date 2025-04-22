@@ -9,8 +9,6 @@ import es.nexphernandez.buscaminas.model.UsuarioEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -24,25 +22,21 @@ public class LoginController extends AbstractController {
     @FXML
     private ComboBox<String> idiomaComboBox;
     @FXML
-    public Label iniciarText;
+    public Text usuarioText;
     @FXML
-    public Label usuarioText;
+    private TextField userEmailTextField;
     @FXML
-    private TextField usuarioTextField;
+    public Text passwordText;
     @FXML
-    public Label contraseniaText;
-    @FXML
-    private PasswordField contraseniaTextField;
+    private PasswordField passwordField;
     @FXML
     private Text errorText;
     @FXML
-    private Button iniciarButton;
+    private Button aceptarButton;
     @FXML
-    public Hyperlink olvidasteText;
+    public Button registrarButton;
     @FXML
-    public Text nuevoUsuarioText;
-    @FXML
-    public Button crearCuentaButton;
+    public Button recuperarButton;
 
     @FXML
     public void initialize() {
@@ -59,10 +53,10 @@ public class LoginController extends AbstractController {
      *
      */
     @FXML
-    private void buttonToPostsOnClick() {
+    private void loginAceptarOnClick() {
         if (revisarCamposLogin()) {
             errorText.setText("¡Bienvenidos al mundo de la programación!");
-            cambiarPantalla(iniciarButton, "posts", "app-init");
+            cambiarPantalla(aceptarButton, "inicio", "app-init");
         }
     }
 
@@ -72,20 +66,20 @@ public class LoginController extends AbstractController {
      * @return true/false
      */
     private boolean revisarCamposLogin() {
-        if (!comprobarTextField(usuarioTextField)) {
+        if (!comprobarTextField(userEmailTextField)) {
             errorText.setText("Usuario no puede estar vacio");
             return false;
         }
-        if (!comprobarTextField(contraseniaTextField)) {
+        if (!comprobarTextField(passwordField)) {
             errorText.setText("Contraseña no puede estar vacio");
             return false;
         }
-        UsuarioEntity usuario = getUsuarioServiceModel().obtenerUsuarioPorUsuario(usuarioTextField.getText());
+        UsuarioEntity usuario = getUsuarioServiceModel().obtenerUsuarioPorUsuario(userEmailTextField.getText());
         if (usuario == null) {
             errorText.setText("el usuario no existe");
             return false;
         }
-        if (!(usuario.getContrasenia().equals(contraseniaTextField.getText()))) {
+        if (!(usuario.getContrasenia().equals(passwordField.getText()))) {
             errorText.setText("error en usuario o contraseña");
             return false;
         }
@@ -96,13 +90,13 @@ public class LoginController extends AbstractController {
      * cambia a la pantalla registrar
      */
     @FXML
-    private void logInToRegistrarOnClick() {
-        cambiarPantalla(crearCuentaButton, "registrar", "app-init");
+    private void loginToRegistrarOnClick() {
+        cambiarPantalla(registrarButton, "registrar", "app-init");
     }
 
     @FXML
     private void loginToRecuperarOnClick(){
-        cambiarPantalla(crearCuentaButton, getIdioma(), getIdioma());
+        cambiarPantalla(recuperarButton, "recuperar", "app-init");
     }
 
     /**
@@ -120,14 +114,6 @@ public class LoginController extends AbstractController {
      * cambiar idioma de la pantalla login
      */
     public void cambiarIdiomaLogIn() {
-        iniciarText.setText(ConfigManager.ConfigProperties.getProperty("iniciarText"));
         usuarioText.setText(ConfigManager.ConfigProperties.getProperty("usuarioText"));
-        usuarioTextField.setPromptText(ConfigManager.ConfigProperties.getProperty("usuarioTextField"));
-        contraseniaText.setText(ConfigManager.ConfigProperties.getProperty("contraseniaText"));
-        contraseniaTextField.setPromptText(ConfigManager.ConfigProperties.getProperty("contraseniaTextField"));
-        iniciarButton.setText(ConfigManager.ConfigProperties.getProperty("iniciarButton"));
-        olvidasteText.setText(ConfigManager.ConfigProperties.getProperty("olvidasteText"));
-        nuevoUsuarioText.setText(ConfigManager.ConfigProperties.getProperty("nuevoUsuarioText"));
-        crearCuentaButton.setText(ConfigManager.ConfigProperties.getProperty("crearCuentaButton"));
     }
 }
