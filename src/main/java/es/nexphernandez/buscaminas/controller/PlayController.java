@@ -13,11 +13,10 @@ import java.util.Random;
 import es.nexphernandez.buscaminas.controller.abstractas.AbstractController;
 
 public class PlayController extends AbstractController{
+    private static final int FILAS = ConfiguracionDePartida.filas;
+    private static final int COLUMNAS = ConfiguracionDePartida.columnas;
+    private static final int MINAS = ConfiguracionDePartida.minas;
 
-    private static final int FILAS = 10;
-    private static final int COLUMNAS = 10;
-    private static final int MINAS = 10; 
-    
     @FXML
     private GridPane grid;
 
@@ -31,6 +30,8 @@ public class PlayController extends AbstractController{
     private Label mensajeLabel;
 
     private int[][] tablero;
+    private boolean[][] descubiertas;
+    private int celdasDescubiertas = 0;
 
     @FXML
     void initialize() {
@@ -51,6 +52,9 @@ public class PlayController extends AbstractController{
     private void crearTablero(int filas, int columnas) {
         grid.getChildren().clear(); 
         tablero = new int[filas][columnas];
+        descubiertas = new boolean[filas][columnas];
+        celdasDescubiertas = 0;
+
         colocarMinas(MINAS);
         contarMinasAlrededor();
 
@@ -85,33 +89,66 @@ public class PlayController extends AbstractController{
                 if (tablero[i][j] == -1) continue; 
                 int contador = 0;
 
-               
                 for (int x = -1; x <= 1; x++) {
                     for (int y = -1; y <= 1; y++) {
                         if (x == 0 && y == 0) continue; 
                         int nuevaFila = i + x;
                         int nuevaCol = j + y;
-                        
-                        if (nuevaFila >= 0 && nuevaFila < tablero.length && nuevaCol >= 0 && nuevaCol < tablero[0].length) {
-                            if (tablero[nuevaFila][nuevaCol] == -1) contador++;
+
+                        if (nuevaFila >= 0 && nuevaFila < tablero.length &&
+                            nuevaCol >= 0 && nuevaCol < tablero[0].length &&
+                            tablero[nuevaFila][nuevaCol] == -1) {
+                            contador++;
                         }
                     }
                 }
+
                 tablero[i][j] = contador; 
             }
         }
     }
 
     private void manejarBoton(Button btn, int fila, int columna) {
+        if (descubiertas[fila][columna]) return;
+
         btn.setDisable(true);
+        descubiertas[fila][columna] = true;
+
         if (tablero[fila][columna] == -1) {
             btn.setText("💣"); 
-            mensajeLabel.setText("¡Perdiste!"); 
-            
+            mensajeLabel.setText("¡Perdiste!");
+            revelarTodo();
         } else {
             btn.setText(String.valueOf(tablero[fila][columna])); 
+            celdasDescubiertas++;
+
+            if (celdasDescubiertas == (FILAS * COLUMNAS - MINAS)) {
+                mensajeLabel.setText("¡Ganaste!");
+                revelarTodo();
+            }
         }
     }
-    
 
+    private void revelarTodo() {
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
+                Button btn = (Button) getNodeFromGridPane(i, j);
+                btn.setDisable(true);
+                if (tablero[i][j] == -1) {
+                    btn.setText("💣");
+                } else {
+                    btn.setText(String.valueOf(tablero[i][j]));
+                }
+            }
+        }
+    }
+
+    private javafx.scene.Node getNodeFromGridPane(int fila, int columna) {
+        for (javafx.scene.Node node : grid.getChildren()) {
+            if (GridPane.getRowIndex(node) == fila && GridPane.getColumnIndex(node) == columna) {
+                return node;
+            }
+        }
+        return null;
+    }
 }

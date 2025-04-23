@@ -1,12 +1,8 @@
 package es.nexphernandez.buscaminas.controller.abstractas;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.Properties;
 
+import java.io.IOException;
+import java.util.Properties;
 import es.nexphernandez.buscaminas.PrincipalApplication;
 import es.nexphernandez.buscaminas.config.ConfigManager;
 import es.nexphernandez.buscaminas.model.UsuarioServiceModel;
@@ -15,10 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**

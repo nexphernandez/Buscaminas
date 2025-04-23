@@ -13,7 +13,7 @@
    <children>
       <Text fx:id="userText" layoutX="37.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0"
          text="User:" wrappingWidth="92.7294921875" />
-      <TextField fx:id="userTextField" layoutX="142.0" layoutY="70.0" promptText="User" />
+      <TextField fx:id="usuarioTextField" layoutX="142.0" layoutY="70.0" promptText="User" />
       <Text fx:id="emailText1" layoutX="37.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0"
          text="Email:" wrappingWidth="92.7294921875" />
       <TextField fx:id="emailTextField1" layoutX="142.0" layoutY="114.0" promptText="User/Email" />
