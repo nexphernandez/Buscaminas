@@ -1,0 +1,121 @@
+/* General styles for the root */
+.root {
+    -fx-font-family: "Arial";
+    -fx-background-color: #1e1e2f; /* Fondo oscuro */
+    -fx-padding: 10px;
+}
+
+/* Labels (Text Elements) */
+.label, .text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #ffffff; /* Blanco */
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 3, 0, 0, 2);
+    -fx-padding: 5px;
+}
+
+/* Buttons */
+.button {
+    -fx-background-color: linear-gradient(#3a3f47, #2c2f36); /* Degradado oscuro */
+    -fx-border-color: #61dafb; /* Azul claro */
+    -fx-border-width: 2px;
+    -fx-text-fill: #ffffff; /* Blanco */
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-pref-width: 120px;
+    -fx-pref-height: 40px;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 5, 0, 2, 2);
+}
+
+.button:hover {
+    -fx-background-color: #61dafb; /* Azul claro */
+    -fx-text-fill: #1e1e2f; /* Fondo oscuro */
+}
+
+.button:pressed {
+    -fx-background-color: #ffffff; /* Blanco */
+    -fx-text-fill: #1e1e2f;
+}
+
+/* TextFields and PasswordFields */
+.text-field, .password-field {
+    -fx-background-color: #3a3f47; /* Gris oscuro */
+    -fx-border-color: #61dafb; /* Azul claro */
+    -fx-border-radius: 3px;
+    -fx-border-width: 2px;
+    -fx-text-fill: #ffffff; /* Blanco */
+    -fx-font-size: 14px;
+    -fx-padding: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 5, 0, 2, 2);
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #ffffff; /* Blanco */
+}
+
+.text-field:prompt-text, .password-field:prompt-text {
+    -fx-text-fill: #a1a1a1; /* Gris claro */
+}
+
+/* ComboBox */
+.combo-box {
+    -fx-background-color: #3a3f47; /* Gris oscuro */
+    -fx-border-color: #61dafb; /* Azul claro */
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+}
+
+.combo-box:hover {
+    -fx-background-color: #61dafb; /* Azul claro */
+    -fx-text-fill: #1e1e2f; /* Fondo oscuro */
+}
+
+/* AnchorPane (General Layout Containers) */
+.anchor-pane {
+    -fx-background-color: #282a36; /* Gris oscuro */
+    -fx-padding: 15px;
+    -fx-border-color: #61dafb;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 10, 0, 0, 5);
+}
+
+/* Specific Styles for Grids */
+.grid {
+    -fx-hgap: 5px;
+    -fx-vgap: 5px;
+    -fx-alignment: center;
+}
+
+.grid .button {
+    -fx-pref-width: 50px;
+    -fx-pref-height: 50px;
+    -fx-background-color: #3a3f47; /* Gris oscuro */
+    -fx-border-color: #61dafb; /* Azul claro */
+    -fx-border-width: 1px;
+}
+
+.grid .button:hover {
+    -fx-background-color: #61dafb; /* Azul claro */
+    -fx-text-fill: #1e1e2f; /* Fondo */
+}
+
+.grid .button:pressed {
+    -fx-background-color: #1c1f23; /* Gris más oscuro */
+    -fx-text-fill: #ffffff; /* Blanco */
+}
+
+/* Specific Error Message Styles */
+.error-text {
+    -fx-font-size: 12px;
+    -fx-text-fill: #ff5555; /* Rojo claro */
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.75), 3, 0, 0, 2);
+}
+
+/* ImageView (for logos or images) */
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 5);
+    -fx-padding: 5px;
+}
