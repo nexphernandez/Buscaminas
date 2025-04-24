@@ -3,6 +3,7 @@ package es.nexphernandez.buscaminas.controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import es.nexphernandez.buscaminas.config.ConfigManager;
 import es.nexphernandez.buscaminas.controller.abstractas.AbstractController;
 import es.nexphernandez.buscaminas.model.UsuarioEntity;
 import javafx.fxml.FXML;
@@ -136,9 +137,14 @@ public class RegistrarController extends AbstractController {
      * cambiar idioma Registrar
      */
     public void cambiarIdiomaRegistrar() {
-
-       
-
+        userText.setText(ConfigManager.ConfigProperties.getProperty("usuarioText"));
+        nombreText.setText(ConfigManager.ConfigProperties.getProperty("nombreText"));
+        emailText1.setText(ConfigManager.ConfigProperties.getProperty("correoText"));
+        emailText11.setText(ConfigManager.ConfigProperties.getProperty("correoText2"));
+        nivelText1.setText(ConfigManager.ConfigProperties.getProperty("contraseniaText"));
+        nivelText.setText(ConfigManager.ConfigProperties.getProperty("contraseniaText2"));
+        guardarButton.setText(ConfigManager.ConfigProperties.getProperty("buttonAceptarRegistrar"));
+        regresarButton.setText(ConfigManager.ConfigProperties.getProperty("buttonAtras"));
     }
 
 }

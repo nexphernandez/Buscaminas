@@ -8,12 +8,16 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 /**
  * @author nexphernandez
  * @version 1.0.0
  */
 import java.util.Random;
 
+import es.nexphernandez.buscaminas.config.ConfigManager;
 import es.nexphernandez.buscaminas.controller.abstractas.AbstractController;
 
 public class PlayController extends AbstractController {
@@ -37,37 +41,41 @@ public class PlayController extends AbstractController {
     private boolean[][] descubiertas;
     private int celdasDescubiertas = 0;
 
+    @FXML
+    public void initialize() {
+        cambiarIdiomaPlay();
+    }
+
     public void configurarPartida(int filas, int columnas, int minas) {
         this.filas = filas;
         this.columnas = columnas;
         this.minas = minas;
-    
+
         // Crear el tablero
         crearTablero(filas, columnas);
-    
+
         // Ajustar el tamaño de la ventana según el tablero
         Platform.runLater(() -> ajustarTamañoVentana());
     }
-    
-   private void ajustarTamañoVentana() {
+
+    private void ajustarTamañoVentana() {
         // Tamaño de cada celda
         int tamañoCelda = 30;
-    
+
         // Calcular tamaño total del GridPane
         int anchoGrid = columnas * tamañoCelda;
         int altoGrid = filas * tamañoCelda;
-    
+
         // Ajustar el tamaño del GridPane
         grid.setPrefSize(anchoGrid, altoGrid);
-    
+
         // Obtener el Stage desde el GridPane
         Stage stage = (Stage) grid.getScene().getWindow();
-    
+
         // Ajustar el tamaño del Stage
         stage.setWidth(anchoGrid + 100); // +100 para márgenes adicionales
         stage.setHeight(altoGrid + 250); // +150 para botones, etiquetas, etc.
     }
-    
 
     @FXML
     void nuevoJuego() {
@@ -93,15 +101,46 @@ public class PlayController extends AbstractController {
             for (int j = 0; j < columnas; j++) {
                 Button btn = new Button();
                 btn.setPrefSize(30, 30); // Tamaño fijo para cada celda
+                btn.setMinSize(30, 30);  // Tamaño mínimo
+                btn.setMaxSize(30, 30);  // Tamaño máximo
                 final int fila = i;
                 final int columna = j;
-                btn.setOnAction(e -> manejarBoton(btn, fila, columna));
+    
+                // Manejar clics del mouse
+                btn.setOnMouseClicked(e -> {
+                    if (e.getButton().name().equals("PRIMARY")) { // Clic izquierdo
+                        manejarBoton(btn, fila, columna);
+                    } else if (e.getButton().name().equals("SECONDARY")) { // Clic derecho
+                        colocarBandera(btn, fila, columna);
+                    }
+                });
+    
                 grid.add(btn, j, i);
             }
         }
     
         // Establecer alineación del GridPane
         grid.setAlignment(Pos.CENTER);
+    }
+
+    private void colocarBandera(Button btn, int fila, int columna) {
+        // Si la celda ya está descubierta, no hacemos nada
+        if (descubiertas[fila][columna]) {
+            return;
+        }
+    
+        // Alternar entre colocar y quitar la bandera
+        if (btn.getGraphic() == null) {
+            // Cargar la imagen de la banderita
+            Image banderaImagen = new Image(
+                    getClass().getResourceAsStream("/img/bandera.png"));
+            ImageView banderaView = new ImageView(banderaImagen);
+            banderaView.setFitWidth(20); // Ajusta el tamaño de la imagen
+            banderaView.setFitHeight(20);
+            btn.setGraphic(banderaView); // Colocar la banderita
+        } else {
+            btn.setGraphic(null); // Quitar la banderita
+        }
     }
 
     private void colocarMinas(int cantidadMinas) {
@@ -148,30 +187,66 @@ public class PlayController extends AbstractController {
         if (descubiertas[fila][columna]) {
             return;
         }
-
+    
         // Marcamos la celda como descubierta
         descubiertas[fila][columna] = true;
-
+    
         // Verificamos si la celda contiene una mina
         if (tablero[fila][columna] == -1) {
             btn.setStyle("-fx-background-color: red;"); // Cambiamos el color para indicar la mina
-            btn.setText("💣"); // Mostramos una mina
+    
+            // Cargar la imagen de la bomba
+            Image bombaImagen = new Image(
+                    getClass().getResourceAsStream("/img/bomba.png"));
+            ImageView bombaView = new ImageView(bombaImagen);
+            bombaView.setFitWidth(20); // Ajusta el tamaño de la imagen
+            bombaView.setFitHeight(20);
+            btn.setGraphic(bombaView); // Establece la imagen en el botón
+    
             mensajeLabel.setText("¡Has perdido! Pulsa 'Nuevo Juego' para reiniciar.");
             deshabilitarTablero(); // Finalizamos el juego
             return;
         }
-
+    
         // Si no es una mina, mostramos el número de minas adyacentes
         int minasCercanas = tablero[fila][columna];
         if (minasCercanas > 0) {
             btn.setText(String.valueOf(minasCercanas));
             btn.setDisable(true); // Deshabilitamos el botón
+    
+            // Cambiar el color del texto según el número
+            switch (minasCercanas) {
+                case 1:
+                    btn.setStyle("-fx-text-fill: blue;"); // Azul para 1
+                    break;
+                case 2:
+                    btn.setStyle("-fx-text-fill: green;"); // Verde para 2
+                    break;
+                case 3:
+                    btn.setStyle("-fx-text-fill: red;"); // Rojo para 3
+                    break;
+                case 4:
+                    btn.setStyle("-fx-text-fill: purple;"); // Morado para 4
+                    break;
+                case 5:
+                    btn.setStyle("-fx-text-fill: maroon;"); // Marrón para 5
+                    break;
+                case 6:
+                    btn.setStyle("-fx-text-fill: turquoise;"); // Turquesa para 6
+                    break;
+                case 7:
+                    btn.setStyle("-fx-text-fill: black;"); // Negro para 7
+                    break;
+                case 8:
+                    btn.setStyle("-fx-text-fill: gray;"); // Gris para 8
+                    break;
+            }
         } else {
             // Descubrimos celdas adyacentes si la celda está vacía
             btn.setDisable(true);
             descubrirAdyacentes(fila, columna);
         }
-
+    
         // Actualizamos el conteo de celdas descubiertas
         celdasDescubiertas++;
         if (celdasDescubiertas == (filas * columnas - minas)) {
@@ -217,5 +292,13 @@ public class PlayController extends AbstractController {
             }
         }
         return null;
+    }
+    /**
+     * cambiar idioma de la pantalla play
+     */
+    public void cambiarIdiomaPlay() {
+        mensajeLabel.setText(ConfigManager.ConfigProperties.getProperty("mensajeLabel"));
+        nuevoJuegoBtn.setText(ConfigManager.ConfigProperties.getProperty("nuevoJuegoBtn"));
+        atrasButon.setText(ConfigManager.ConfigProperties.getProperty("atrasButon"));
     }
 }

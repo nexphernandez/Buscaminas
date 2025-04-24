@@ -76,10 +76,10 @@ public abstract class AbstractController {
      */
     protected String cargarIdiomaActual() {
         if (idiomaActual == null || idiomaActual.isEmpty()) {
-            idiomaActual = "es";
+            idiomaActual = "es"; // Idioma predeterminado
         }
-
-        String path = pathFichero + ficheroStr + idiomaActual + ".properties";
+    
+        String path = "idioma-" + idiomaActual + ".properties";
         ConfigManager.ConfigProperties.setPath(path);
         return idiomaActual;
     }

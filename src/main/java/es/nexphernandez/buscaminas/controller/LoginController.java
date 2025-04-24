@@ -95,7 +95,7 @@ public class LoginController extends AbstractController {
     }
 
     @FXML
-    private void loginToRecuperarOnClick(){
+    private void loginToRecuperarOnClick() {
         cambiarPantalla(recuperarButton, "recuperar", "app-init");
     }
 
@@ -104,9 +104,11 @@ public class LoginController extends AbstractController {
      */
     @FXML
     private void comboBoxCambiarIdioma() {
-        String idioma = idiomaComboBox.getValue().toString();
+        String idioma = idiomaComboBox.getValue();
         setIdioma(idioma);
         cargarIdiomaActual();
+
+        // Actualiza los textos de la pantalla actual
         cambiarIdiomaLogIn();
     }
 
@@ -115,5 +117,9 @@ public class LoginController extends AbstractController {
      */
     public void cambiarIdiomaLogIn() {
         usuarioText.setText(ConfigManager.ConfigProperties.getProperty("usuarioText"));
+        passwordText.setText(ConfigManager.ConfigProperties.getProperty("passwordText"));
+        aceptarButton.setText(ConfigManager.ConfigProperties.getProperty("iniciarButton"));
+        registrarButton.setText(ConfigManager.ConfigProperties.getProperty("crearCuentaButton"));
+        recuperarButton.setText(ConfigManager.ConfigProperties.getProperty("olvidasteText"));
     }
 }

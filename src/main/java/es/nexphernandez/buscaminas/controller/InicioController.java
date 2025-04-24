@@ -2,6 +2,7 @@ package es.nexphernandez.buscaminas.controller;
 
 import java.io.IOException;
 
+import es.nexphernandez.buscaminas.config.ConfigManager;
 import es.nexphernandez.buscaminas.controller.abstractas.AbstractController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,14 +17,12 @@ import javafx.stage.Stage;
  * @author nexphernandez
  * @version 1.0.0
  */
-public class InicioController extends AbstractController{
+public class InicioController extends AbstractController {
 
-    @FXML
-    public Text userText;
     @FXML
     private TextField userTextField;
     @FXML
-    public ComboBox<String> dificultadBox;
+    private ComboBox<String> dificultadComboBox;
     @FXML
     private Text minasText;
     @FXML
@@ -47,10 +46,10 @@ public class InicioController extends AbstractController{
 
     @FXML
     public void initialize() {
-        dificultadBox.getItems().addAll("Fácil", "Medio", "Difícil", "Personalizada");
-        dificultadBox.setValue("Fácil");
+        dificultadComboBox.getItems().addAll("Fácil", "Medio", "Difícil", "Personalizada");
+        dificultadComboBox.setValue("Fácil");
         onDificultadChange();
-
+        cambiarIdiomaInicio();
     }
 
     /**
@@ -58,7 +57,7 @@ public class InicioController extends AbstractController{
      */
     @FXML
     private void onDificultadChange() {
-        String seleccion = (String) dificultadBox.getValue();
+        String seleccion = (String) dificultadComboBox.getValue();
         boolean personalizada = "Personalizada".equals(seleccion);
         filasText.setDisable(!personalizada);
         columnasText.setDisable(!personalizada);
@@ -74,11 +73,11 @@ public class InicioController extends AbstractController{
      */
     @FXML
     private void inicioToPartidaOnClick() {
-        String seleccion = (String) dificultadBox.getValue();
+        String seleccion = (String) dificultadComboBox.getValue();
         int filas = 0;
         int columnas = 0;
         int minas = 0;
-    
+
         switch (seleccion) {
             case "Fácil":
                 filas = 8;
@@ -100,7 +99,7 @@ public class InicioController extends AbstractController{
                     filas = Integer.parseInt(filasField.getText());
                     columnas = Integer.parseInt(columnasField.getText());
                     minas = Integer.parseInt(minasField.getText());
-    
+
                     if (filas < 1 || columnas < 1 || minas < 1 || minas >= filas * columnas) {
                         mensajeError("Valores inválidos. Asegúrate de que haya al menos 1 mina y espacio suficiente.");
                         return;
@@ -114,7 +113,7 @@ public class InicioController extends AbstractController{
                 mensajeError("Selecciona una dificultad.");
                 return;
         }
-    
+
         // Cambiar a la pantalla de juego pasando las configuraciones
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/play.fxml"));
         try {
@@ -139,4 +138,20 @@ public class InicioController extends AbstractController{
         cambiarPantalla(regresarButton, "app-init", "app-init");
     }
 
+    /**
+     * cambiar idioma de la pantalla inicio
+     */
+    public void cambiarIdiomaInicio() {
+        jugarButton.setText(ConfigManager.ConfigProperties.getProperty("jugarButton"));
+        regresarButton.setText(ConfigManager.ConfigProperties.getProperty("regresarButton"));
+    
+        // Actualizar las opciones del ComboBox de dificultad
+        dificultadComboBox.getItems().clear();
+        dificultadComboBox.getItems().addAll(
+            ConfigManager.ConfigProperties.getProperty("dificultadFacil"),
+            ConfigManager.ConfigProperties.getProperty("dificultadMedia"),
+            ConfigManager.ConfigProperties.getProperty("dificultadDificil")
+        );
+        dificultadComboBox.setPromptText(ConfigManager.ConfigProperties.getProperty("dificultadBoxPrompt"));
+    }
 }

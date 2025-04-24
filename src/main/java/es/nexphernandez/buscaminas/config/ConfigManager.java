@@ -2,6 +2,7 @@ package es.nexphernandez.buscaminas.config;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
@@ -26,17 +27,13 @@ public class ConfigManager {
 
         public static void setPath(String rutaPath) {
             System.out.println("Dentro del setPath");
-            File file = new File(rutaPath);
-
-            if (!file.exists() || !file.isFile()) {
-                System.out.println("Path:" + file.getAbsolutePath());
-            }
-            path = rutaPath;
-            try {
-                System.out.println("Dentro del ConfigProperties");
-                FileInputStream input = new FileInputStream(path);
-                InputStreamReader isr = new InputStreamReader(input, "UTF-8");
-                properties.load(isr);
+            try (InputStream input = ConfigManager.class.getResourceAsStream("/" + rutaPath)) {
+                if (input == null) {
+                    System.out.println("Archivo no encontrado en el classpath: " + rutaPath);
+                    return;
+                }
+                properties.load(new InputStreamReader(input, "UTF-8"));
+                System.out.println("Archivo de idioma cargado correctamente: " + rutaPath);
             } catch (Exception e) {
                 e.printStackTrace();
             }

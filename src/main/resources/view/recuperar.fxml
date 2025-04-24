@@ -9,15 +9,15 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="350.0" stylesheets="@../styles/styleGeneral.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.nexphernandez.buscaminas.controller.RecuperarController">
    <children>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="83.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="135.0" fitWidth="174.0" layoutX="116.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../email.png" />
+            <Image url="@../img/gmail.png" />
          </image>
       </ImageView>
       <Text fx:id="userEmailText" fill="WHITE" layoutX="56.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" wrappingWidth="65.7294921875" />
-      <TextField fx:id="emailTextField" layoutX="123.0" layoutY="203.0" promptText="Email" />
-      <Button fx:id="enviarButton" layoutX="123.0" layoutY="298.0" mnemonicParsing="false" onAction="#enviarOnClick" prefHeight="24.0" prefWidth="150.0" text="Enviar" />
-      <Text fx:id="errorText" fill="WHITE" layoutX="150.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="65.7294921875" />
-      <Button fx:id="regresarButton" layoutX="123.0" layoutY="369.0" mnemonicParsing="false" onAction="#recuperarToLoginOnClick" prefHeight="24.0" prefWidth="200.0" text="Regresar" />
+      <TextField fx:id="emailTextField" layoutX="109.0" layoutY="200.0" promptText="Email" />
+      <Button fx:id="enviarButton" layoutX="108.0" layoutY="287.0" mnemonicParsing="false" onAction="#enviarOnClick" prefHeight="24.0" prefWidth="150.0" text="Enviar" />
+      <Text fx:id="errorText" fill="WHITE" layoutX="142.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="65.7294921875" />
+      <Button fx:id="regresarButton" layoutX="83.0" layoutY="368.0" mnemonicParsing="false" onAction="#recuperarToLoginOnClick" prefHeight="24.0" prefWidth="200.0" text="Regresar" />
    </children>
 </AnchorPane>

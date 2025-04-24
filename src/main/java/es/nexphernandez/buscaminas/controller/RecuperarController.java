@@ -2,6 +2,7 @@
 package es.nexphernandez.buscaminas.controller;
 
 
+import es.nexphernandez.buscaminas.config.ConfigManager;
 import es.nexphernandez.buscaminas.controller.abstractas.AbstractController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,6 +26,11 @@ public class RecuperarController extends AbstractController{
     @FXML
     private Button regresarButton;
 
+    @FXML
+    public void initialize() {
+        cambiarIdiomaRecuperar();
+    }
+
     /**
      * va a la pantalla del perfil
      */
@@ -38,5 +44,14 @@ public class RecuperarController extends AbstractController{
     @FXML
     public void recuperarToLoginOnClick(){
         cambiarPantalla(regresarButton, "app-init", "recuperar" );
+    }
+
+    /**
+     * cambiar idioma de la pantalla recuperar
+     */
+    public void cambiarIdiomaRecuperar() {
+        userEmailText.setText(ConfigManager.ConfigProperties.getProperty("correoText"));
+        enviarButton.setText(ConfigManager.ConfigProperties.getProperty("buttonAceptarRegistrar"));
+        regresarButton.setText(ConfigManager.ConfigProperties.getProperty("buttonAtras"));
     }
 }
