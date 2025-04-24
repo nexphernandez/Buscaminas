@@ -37,11 +37,11 @@ Proporciona una forma divertida de ejercitar la mente, desarrollando habilidades
 ## 🎨 Diseño
 
 ### **Prototipo Inicial**
-![Wireframe](https://via.placeholder.com/500x300.png?text=Wireframe+Inicial)
+![Wireframe](docs/imagenes/portada.png)
 *El diseño inicial muestra una estructura básica centrada en la funcionalidad principal del juego.*
 
 ### **Diseño Final**
-![Diseño Final](https://via.placeholder.com/500x300.png?text=Captura+Diseño+Final)
+![Diseño Final](docs/imagenes/jugar.png)
 *El diseño final incluye mejoras en la interfaz, colores y una experiencia de usuario más intuitiva.*
 
 ---
@@ -69,8 +69,17 @@ Sigue estos pasos para ejecutar el proyecto localmente:
 
 ## 🎥 Demo
 
-![Demo GIF](https://via.placeholder.com/500x300.png?text=Demo+GIF)
-*Una demostración rápida del juego en acción.*
+### **Pantalla de Inicio**
+![Pantalla de Inicio](docs/imagenes/ingresar.png)
+
+### **Pantalla de Selección de Dificultad**
+![Dificultad](docs/imagenes/dificultad.png)
+
+### **Pantalla de Juego**
+![Pantalla de Juego](docs/imagenes/jugar.png)
+
+### **Pantalla de Derrota**
+![Pantalla de Derrota](docs/imagenes/perdiste.png)
 
 ---
 
@@ -116,4 +125,4 @@ Este proyecto está bajo la licencia [MIT](https://opensource.org/licenses/MIT).
 Si tienes preguntas o sugerencias, no dudes en contactarme:
 
 - **Autor:** [nexphernandez](https://github.com/nexphernandez)
-- **Correo:** nexphernandez@example.com
+- **Correo:** nicolaseh3b1112@gmail.com
