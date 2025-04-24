@@ -36,13 +36,11 @@ Proporciona una forma divertida de ejercitar la mente, desarrollando habilidades
 
 ## 🎨 Diseño
 
-### **Prototipo Inicial**
+### **Pantalla Inicial**
 ![Wireframe](docs/imagenes/portada.png)
-*El diseño inicial muestra una estructura básica centrada en la funcionalidad principal del juego.*
 
-### **Diseño Final**
+### **Pantalla de juego**
 ![Diseño Final](docs/imagenes/jugar.png)
-*El diseño final incluye mejoras en la interfaz, colores y una experiencia de usuario más intuitiva.*
 
 ---
 
