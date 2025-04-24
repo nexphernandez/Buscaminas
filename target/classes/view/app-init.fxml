@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="350.0" stylesheets="@../styles/styleGeneral.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.nexphernandez.buscaminas.controller.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="350.0" stylesheets="@../styles/styleGeneral.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.nexphernandez.buscaminas.controller.LoginController">
   <children>
     <Text fx:id="usuarioText" fill="WHITE" layoutX="37.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User/Email:" wrappingWidth="92.7294921875" />
     <TextField fx:id="userEmailTextField" layoutX="142.0" layoutY="120.0" promptText="User/Email" />
@@ -16,7 +16,7 @@
     <Text fx:id="errorText" layoutX="164.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" />
     <Button fx:id="aceptarButton" layoutX="115.0" layoutY="231.0" mnemonicParsing="false" onAction="#loginAceptarOnClick" prefHeight="24.0" prefWidth="200.0" text="Aceptar" />
     <Button fx:id="registrarButton" layoutX="115.0" layoutY="300.0" mnemonicParsing="false" onAction="#loginToRegistrarOnClick" prefHeight="24.0" prefWidth="200.0" text="Registrar" />
-    <Button fx:id="recuperarButton" layoutX="115.0" layoutY="380.0" mnemonicParsing="false" onAction="#loginToRecuperarOnClick" prefHeight="24.0" prefWidth="166.0" text="Recuperar Contraseña" />
-      <ComboBox fx:id="idiomaComboBox" layoutX="100.0" layoutY="70.0" prefWidth="150.0" promptText="Idiomas" />
+    <Button fx:id="recuperarButton" layoutX="104.0" layoutY="380.0" minHeight="32.0" minWidth="200.0" mnemonicParsing="false" onAction="#loginToRecuperarOnClick" text="Recuperar Contraseña" wrapText="true" />
+      <ComboBox fx:id="idiomaComboBox" layoutX="100.0" layoutY="70.0" promptText="Idiomas" />
   </children>
 </AnchorPane>

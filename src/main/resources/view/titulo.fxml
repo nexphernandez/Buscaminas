@@ -5,18 +5,24 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="730.0" stylesheets="@../styles/styleGeneral.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.nexphernandez.buscaminas.controller.TituloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="730.0" stylesheets="@../styles/styleGeneral.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.nexphernandez.buscaminas.controller.TituloController">
    <children>
-      <ImageView fitHeight="332.0" fitWidth="617.0" layoutX="52.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="312.0" fitWidth="317.0" layoutX="53.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/buscaminas.png" />
          </image>
       </ImageView>
-      <Button fx:id="entrarButton" layoutX="313.0" layoutY="400.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#tituloToLoginClick" text="Entrar">
+      <Button fx:id="entrarButton" layoutX="358.0" layoutY="354.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#tituloToLoginClick" text="Entrar">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="342.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BUSCAMINAS" textAlignment="CENTER" wrappingWidth="335.4099884033203">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

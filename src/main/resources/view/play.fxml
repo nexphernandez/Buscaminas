@@ -6,16 +6,16 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="400" prefWidth="400" stylesheets="@../styles/stylePlay.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.nexphernandez.buscaminas.controller.PlayController">
+<BorderPane stylesheets="@../styles/stylePlay.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.nexphernandez.buscaminas.controller.PlayController">
     <top>
         <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Minado" />
     </top>
     <center>
         <VBox alignment="CENTER" spacing="10">
-            <GridPane fx:id="grid" hgap="2" vgap="2" />
+            <GridPane fx:id="grid" alignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
             <Label fx:id="mensajeLabel" style="-fx-font-size: 16px;" text="" />
-            <Button fx:id="nuevoJuegoBtn" onAction="#nuevoJuego" text="Nuevo Juego" />
-            <Button fx:id="atrasButon" mnemonicParsing="false" onAction="#onAtrasClick" prefWidth="101.0" text="Atras" />
+            <Button fx:id="nuevoJuegoBtn" minWidth="101.0" onAction="#nuevoJuego" text="Nuevo Juego" wrapText="true" />
+            <Button fx:id="atrasButon" minWidth="101.0" mnemonicParsing="false" onAction="#onAtrasClick" text="Atras" wrapText="true" />
         </VBox>
     </center>
 </BorderPane>

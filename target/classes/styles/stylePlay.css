@@ -20,8 +20,6 @@
     -fx-font-size: 16px;
     -fx-text-fill: #ffffff; /* Blanco */
     -fx-cursor: hand;
-    -fx-pref-width: 120px;
-    -fx-pref-height: 40px;
     -fx-alignment: center;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 5, 0, 2, 2);
 }

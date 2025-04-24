@@ -1,11 +1,16 @@
 package es.nexphernandez.buscaminas.controller;
 
+import java.io.IOException;
+
 import es.nexphernandez.buscaminas.controller.abstractas.AbstractController;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 /**
  * @author nexphernandez
@@ -69,12 +74,11 @@ public class InicioController extends AbstractController{
      */
     @FXML
     private void inicioToPartidaOnClick() {
-
         String seleccion = (String) dificultadBox.getValue();
         int filas = 0;
         int columnas = 0;
         int minas = 0;
-
+    
         switch (seleccion) {
             case "Fácil":
                 filas = 8;
@@ -96,7 +100,7 @@ public class InicioController extends AbstractController{
                     filas = Integer.parseInt(filasField.getText());
                     columnas = Integer.parseInt(columnasField.getText());
                     minas = Integer.parseInt(minasField.getText());
-
+    
                     if (filas < 1 || columnas < 1 || minas < 1 || minas >= filas * columnas) {
                         mensajeError("Valores inválidos. Asegúrate de que haya al menos 1 mina y espacio suficiente.");
                         return;
@@ -110,9 +114,20 @@ public class InicioController extends AbstractController{
                 mensajeError("Selecciona una dificultad.");
                 return;
         }
-
-        ConfiguracionDePartida.set(filas, columnas, minas);
-        cambiarPantalla(jugarButton, "play", "app-init");
+    
+        // Cambiar a la pantalla de juego pasando las configuraciones
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/play.fxml"));
+        try {
+            Stage stage = (Stage) jugarButton.getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+            PlayController playController = loader.getController();
+            playController.configurarPartida(filas, columnas, minas); // Pasar configuraciones
+            stage.setScene(scene);
+            stage.sizeToScene();
+            stage.show(); // Asegurarse de que el Stage esté visible
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void mensajeError(String mensaje) {

@@ -22,8 +22,6 @@
     -fx-text-fill: #ffffff; /* Blanco */
     -fx-font-size: 14px;
     -fx-cursor: hand;
-    -fx-pref-width: 120px;
-    -fx-pref-height: 40px;
     -fx-alignment: center;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 5, 0, 2, 2);
 }
@@ -60,10 +58,13 @@
 
 /* ComboBox */
 .combo-box {
-    -fx-background-color: #3a3f47; /* Gris oscuro */
-    -fx-border-color: #61dafb; /* Azul claro */
+    -fx-background-color: #61dafb; /* Gris oscuro */
+    -fx-border-color: transparent; /* Azul claro */
     -fx-text-fill: #ffffff;
+    -fx-font-color: white;
     -fx-font-size: 14px;
+    -fx-boder-radius:100;
+    -fx-background-radius:100;
 }
 
 .combo-box:hover {

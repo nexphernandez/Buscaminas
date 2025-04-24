@@ -120,10 +120,11 @@ public abstract class AbstractController {
             FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource("/view/" +pantalla + ".fxml"));
             Stage stage = (Stage) botton.getScene().getWindow();
             Scene scene;
-            scene = new Scene(fxmlLoader.load(), 350, 500);
+            scene = new Scene(fxmlLoader.load());
             stage.setResizable(false);
             stage.setTitle("Pantalla Princial");
             stage.setScene(scene);
+            stage.sizeToScene();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -143,10 +144,11 @@ public abstract class AbstractController {
             FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource("/view/" +pantalla + ".fxml"));
             Stage stage = (Stage) botton.getScene().getWindow();
             Scene scene;
-            scene = new Scene(fxmlLoader.load(), 350, 500);
+            scene = new Scene(fxmlLoader.load());
             stage.setResizable(false);
             stage.setTitle("Pantalla Princial");
             stage.setScene(scene);
+            stage.sizeToScene();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -165,10 +167,11 @@ public abstract class AbstractController {
             FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource("/view/" +pantallaAnterior + ".fxml"));
             Stage stage = (Stage) botton.getScene().getWindow();
             Scene scene;
-            scene = new Scene(fxmlLoader.load(), 350, 500);
+            scene = new Scene(fxmlLoader.load());
             stage.setResizable(false);
             stage.setTitle("Pantalla Princial");
             stage.setScene(scene);
+            stage.sizeToScene();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
