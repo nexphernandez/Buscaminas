@@ -46,8 +46,18 @@ public class InicioController extends AbstractController {
 
     @FXML
     public void initialize() {
-        dificultadComboBox.getItems().addAll("Fácil", "Medio", "Difícil", "Personalizada");
-        dificultadComboBox.setValue("Fácil");
+        // Configurar las opciones del ComboBox de dificultad desde el archivo de idioma
+        dificultadComboBox.getItems().clear();
+        dificultadComboBox.getItems().addAll(
+                ConfigManager.ConfigProperties.getProperty("dificultadFacil"),
+                ConfigManager.ConfigProperties.getProperty("dificultadMedia"),
+                ConfigManager.ConfigProperties.getProperty("dificultadDificil"),
+                "Personalizada" // Personalizada no necesita traducción
+        );
+        dificultadComboBox.setValue(ConfigManager.ConfigProperties.getProperty("dificultadFacil")); // Valor
+                                                                                                    // predeterminado
+
+        // Configurar el comportamiento inicial
         onDificultadChange();
         cambiarIdiomaInicio();
     }
@@ -73,23 +83,26 @@ public class InicioController extends AbstractController {
      */
     @FXML
     private void inicioToPartidaOnClick() {
-        String seleccion = (String) dificultadComboBox.getValue();
+        String seleccion = dificultadComboBox.getValue(); // Obtén la dificultad seleccionada
         int filas = 0;
         int columnas = 0;
         int minas = 0;
 
         switch (seleccion) {
             case "Fácil":
+            case "Easy": // Traducción al inglés
                 filas = 8;
                 columnas = 8;
                 minas = 10;
                 break;
-            case "Medio":
+            case "Media":
+            case "Medium": // Traducción al inglés
                 filas = 12;
                 columnas = 12;
                 minas = 20;
                 break;
             case "Difícil":
+            case "Hard": // Traducción al inglés
                 filas = 16;
                 columnas = 16;
                 minas = 40;
@@ -144,14 +157,13 @@ public class InicioController extends AbstractController {
     public void cambiarIdiomaInicio() {
         jugarButton.setText(ConfigManager.ConfigProperties.getProperty("jugarButton"));
         regresarButton.setText(ConfigManager.ConfigProperties.getProperty("regresarButton"));
-    
+
         // Actualizar las opciones del ComboBox de dificultad
         dificultadComboBox.getItems().clear();
         dificultadComboBox.getItems().addAll(
-            ConfigManager.ConfigProperties.getProperty("dificultadFacil"),
-            ConfigManager.ConfigProperties.getProperty("dificultadMedia"),
-            ConfigManager.ConfigProperties.getProperty("dificultadDificil")
-        );
+                ConfigManager.ConfigProperties.getProperty("dificultadFacil"),
+                ConfigManager.ConfigProperties.getProperty("dificultadMedia"),
+                ConfigManager.ConfigProperties.getProperty("dificultadDificil"));
         dificultadComboBox.setPromptText(ConfigManager.ConfigProperties.getProperty("dificultadBoxPrompt"));
     }
 }

@@ -20,7 +20,7 @@
       <PasswordField fx:id="passwordField2" layoutX="142.0" layoutY="296.0" promptText="Password" />
       <Button fx:id="guardarButton" layoutX="100.0" layoutY="369.0" mnemonicParsing="false" onAction="#guardarUsuarioOnClick" prefHeight="24.0" prefWidth="200.0" text="Guardar" />
       <Button fx:id="regresarButton" layoutX="100.0" layoutY="422.0" mnemonicParsing="false" onAction="#regresarOnClick" prefHeight="24.0" prefWidth="200.0" text="Regresar" />
-      <Text fx:id="errorText" layoutX="131.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="errorText" fill="WHITE" layoutX="20.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="360.0" />
       <Text fx:id="nombreText" fill="WHITE" layoutX="37.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" wrappingWidth="92.7294921875" />
       <TextField fx:id="nombreTextField" layoutX="142.0" layoutY="205.0" promptText="nombre" />
    </children>

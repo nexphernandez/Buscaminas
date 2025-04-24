@@ -43,6 +43,8 @@ public class PlayController extends AbstractController {
 
     @FXML
     public void initialize() {
+        mensajeLabel.setText(""); // Limpia el mensaje al cargar la pantalla
+        crearTablero(filas, columnas); // Inicializa el tablero
         cambiarIdiomaPlay();
     }
 
@@ -79,8 +81,8 @@ public class PlayController extends AbstractController {
 
     @FXML
     void nuevoJuego() {
-        mensajeLabel.setText("Nuevo juego iniciado!");
-        crearTablero(filas, columnas);
+        mensajeLabel.setText(""); // Limpia el mensaje
+        crearTablero(filas, columnas); // Reinicia el tablero
     }
 
     @FXML
@@ -93,19 +95,19 @@ public class PlayController extends AbstractController {
         tablero = new int[filas][columnas];
         descubiertas = new boolean[filas][columnas];
         celdasDescubiertas = 0;
-    
+
         colocarMinas(minas);
         contarMinasAlrededor();
-    
+
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
                 Button btn = new Button();
                 btn.setPrefSize(30, 30); // Tamaño fijo para cada celda
-                btn.setMinSize(30, 30);  // Tamaño mínimo
-                btn.setMaxSize(30, 30);  // Tamaño máximo
+                btn.setMinSize(30, 30); // Tamaño mínimo
+                btn.setMaxSize(30, 30); // Tamaño máximo
                 final int fila = i;
                 final int columna = j;
-    
+
                 // Manejar clics del mouse
                 btn.setOnMouseClicked(e -> {
                     if (e.getButton().name().equals("PRIMARY")) { // Clic izquierdo
@@ -114,11 +116,11 @@ public class PlayController extends AbstractController {
                         colocarBandera(btn, fila, columna);
                     }
                 });
-    
+
                 grid.add(btn, j, i);
             }
         }
-    
+
         // Establecer alineación del GridPane
         grid.setAlignment(Pos.CENTER);
     }
@@ -128,7 +130,7 @@ public class PlayController extends AbstractController {
         if (descubiertas[fila][columna]) {
             return;
         }
-    
+
         // Alternar entre colocar y quitar la bandera
         if (btn.getGraphic() == null) {
             // Cargar la imagen de la banderita
@@ -187,14 +189,14 @@ public class PlayController extends AbstractController {
         if (descubiertas[fila][columna]) {
             return;
         }
-    
+
         // Marcamos la celda como descubierta
         descubiertas[fila][columna] = true;
-    
+
         // Verificamos si la celda contiene una mina
         if (tablero[fila][columna] == -1) {
             btn.setStyle("-fx-background-color: red;"); // Cambiamos el color para indicar la mina
-    
+        
             // Cargar la imagen de la bomba
             Image bombaImagen = new Image(
                     getClass().getResourceAsStream("/img/bomba.png"));
@@ -202,18 +204,20 @@ public class PlayController extends AbstractController {
             bombaView.setFitWidth(20); // Ajusta el tamaño de la imagen
             bombaView.setFitHeight(20);
             btn.setGraphic(bombaView); // Establece la imagen en el botón
-    
-            mensajeLabel.setText("¡Has perdido! Pulsa 'Nuevo Juego' para reiniciar.");
+        
+            // Establecer el mensaje de "Has perdido" dinámicamente
+            mensajeLabel.setText(ConfigManager.ConfigProperties.getProperty("mensajeLabel"));
+        
             deshabilitarTablero(); // Finalizamos el juego
             return;
         }
-    
+
         // Si no es una mina, mostramos el número de minas adyacentes
         int minasCercanas = tablero[fila][columna];
         if (minasCercanas > 0) {
             btn.setText(String.valueOf(minasCercanas));
             btn.setDisable(true); // Deshabilitamos el botón
-    
+
             // Cambiar el color del texto según el número
             switch (minasCercanas) {
                 case 1:
@@ -246,7 +250,7 @@ public class PlayController extends AbstractController {
             btn.setDisable(true);
             descubrirAdyacentes(fila, columna);
         }
-    
+
         // Actualizamos el conteo de celdas descubiertas
         celdasDescubiertas++;
         if (celdasDescubiertas == (filas * columnas - minas)) {
@@ -293,12 +297,17 @@ public class PlayController extends AbstractController {
         }
         return null;
     }
+
     /**
      * cambiar idioma de la pantalla play
      */
     public void cambiarIdiomaPlay() {
-        mensajeLabel.setText(ConfigManager.ConfigProperties.getProperty("mensajeLabel"));
         nuevoJuegoBtn.setText(ConfigManager.ConfigProperties.getProperty("nuevoJuegoBtn"));
         atrasButon.setText(ConfigManager.ConfigProperties.getProperty("atrasButon"));
+    
+        // Si el mensajeLabel no está vacío, actualízalo con el mensaje traducido
+        if (!mensajeLabel.getText().isEmpty()) {
+            mensajeLabel.setText(ConfigManager.ConfigProperties.getProperty("mensajeLabel"));
+        }
     }
 }
