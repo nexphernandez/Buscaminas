@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane stylesheets="@styles/stylePlay.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.nexphernandez.buscaminas.controller.PlayController">
+<BorderPane stylesheets="@../styles/stylePlay.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.nexphernandez.buscaminas.controller.PlayController">
     <top>
         <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Minado" />
     </top>
