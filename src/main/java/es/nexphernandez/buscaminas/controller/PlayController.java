@@ -43,9 +43,14 @@ public class PlayController extends AbstractController {
 
     @FXML
     public void initialize() {
-        mensajeLabel.setText(""); 
-        crearTablero(filas, columnas); 
+        mensajeLabel.setText("");
+        crearTablero(filas, columnas);
         cambiarIdiomaPlay();
+
+        // Aplica el archivo CSS dinámicamente
+        if (grid.getScene() != null) {
+            grid.getScene().getStylesheets().add(getClass().getResource("/styles/stylePlay.css").toExternalForm());
+        }
     }
 
     public void configurarPartida(int filas, int columnas, int minas) {
@@ -187,14 +192,14 @@ public class PlayController extends AbstractController {
         if (descubiertas[fila][columna]) {
             return;
         }
-    
+
         // Marcamos la celda como descubierta
         descubiertas[fila][columna] = true;
-    
+
         // Verificamos si la celda contiene una mina
         if (tablero[fila][columna] == -1) {
             btn.setStyle("-fx-background-color: red;"); // Cambiamos el color para indicar la mina
-    
+
             // Cargar la imagen de la bomba
             Image bombaImagen = new Image(
                     getClass().getResourceAsStream("/img/bomba.png"));
@@ -202,20 +207,20 @@ public class PlayController extends AbstractController {
             bombaView.setFitWidth(20); // Ajusta el tamaño de la imagen
             bombaView.setFitHeight(20);
             btn.setGraphic(bombaView); // Establece la imagen en el botón
-    
+
             // Establecer el mensaje de "Has perdido" dinámicamente
             mensajeLabel.setText(ConfigManager.ConfigProperties.getProperty("mensajeLabel"));
-    
+
             deshabilitarTablero(); // Finalizamos el juego
             return;
         }
-    
+
         // Si no es una mina, mostramos el número de minas adyacentes
         int minasCercanas = tablero[fila][columna];
         if (minasCercanas > 0) {
             btn.setText(String.valueOf(minasCercanas));
             btn.setDisable(true); // Deshabilitamos el botón
-    
+
             // Limpia las clases previas y asigna una clase CSS específica
             btn.getStyleClass().removeIf(style -> style.startsWith("button-number-"));
             btn.getStyleClass().add("button-number-" + minasCercanas);
@@ -224,7 +229,7 @@ public class PlayController extends AbstractController {
             btn.setDisable(true);
             descubrirAdyacentes(fila, columna);
         }
-    
+
         // Actualizamos el conteo de celdas descubiertas
         celdasDescubiertas++;
         if (celdasDescubiertas == (filas * columnas - minas)) {
@@ -232,6 +237,7 @@ public class PlayController extends AbstractController {
             deshabilitarTablero();
         }
     }
+
     private void descubrirAdyacentes(int fila, int columna) {
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
@@ -277,7 +283,7 @@ public class PlayController extends AbstractController {
     public void cambiarIdiomaPlay() {
         nuevoJuegoBtn.setText(ConfigManager.ConfigProperties.getProperty("nuevoJuegoBtn"));
         atrasButon.setText(ConfigManager.ConfigProperties.getProperty("atrasButon"));
-    
+
         // Si el mensajeLabel no está vacío, actualízalo con el mensaje traducido
         if (!mensajeLabel.getText().isEmpty()) {
             mensajeLabel.setText(ConfigManager.ConfigProperties.getProperty("mensajeLabel"));
