@@ -240,7 +240,7 @@ public class PlayController extends AbstractController {
                     btn.setStyle("-fx-text-fill: rgb(3, 94, 29);"); // Negro para 7
                     break;
                 case 8:
-                    btn.setStyle("-fx-text-fill: rgb(246, 255, 0);"); // Gris para 8
+                    btn.setStyle("-fx-text-fill: rgb(0, 183, 255);"); // Gris para 8
                     break;
             }
         } else {
