@@ -43,8 +43,8 @@ public class PlayController extends AbstractController {
 
     @FXML
     public void initialize() {
-        mensajeLabel.setText(""); // Limpia el mensaje al cargar la pantalla
-        crearTablero(filas, columnas); // Inicializa el tablero
+        mensajeLabel.setText(""); 
+        crearTablero(filas, columnas); 
         cambiarIdiomaPlay();
     }
 
@@ -53,10 +53,8 @@ public class PlayController extends AbstractController {
         this.columnas = columnas;
         this.minas = minas;
 
-        // Crear el tablero
         crearTablero(filas, columnas);
 
-        // Ajustar el tamaño de la ventana según el tablero
         Platform.runLater(() -> ajustarTamañoVentana());
     }
 
