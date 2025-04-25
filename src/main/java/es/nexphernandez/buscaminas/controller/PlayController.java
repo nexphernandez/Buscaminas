@@ -219,28 +219,28 @@ public class PlayController extends AbstractController {
             // Cambiar el color del texto según el número
             switch (minasCercanas) {
                 case 1:
-                    btn.setStyle("-fx-text-fill: blue;"); // Azul para 1
+                    btn.setStyle("-fx-text-fill:rgb(0, 183, 255);"); // Azul para 1
                     break;
                 case 2:
-                    btn.setStyle("-fx-text-fill: green;"); // Verde para 2
+                    btn.setStyle("-fx-text-fill: rgb(0, 255, 64);"); // Verde para 2
                     break;
                 case 3:
-                    btn.setStyle("-fx-text-fill: red;"); // Rojo para 3
+                    btn.setStyle("-fx-text-fill: rgb(255, 0, 0);"); // Rojo para 3
                     break;
                 case 4:
-                    btn.setStyle("-fx-text-fill: purple;"); // Morado para 4
+                    btn.setStyle("-fx-text-fill: rgb(174, 0, 255);"); // Morado para 4
                     break;
                 case 5:
-                    btn.setStyle("-fx-text-fill: maroon;"); // Marrón para 5
+                    btn.setStyle("-fx-text-fill: rgb(255, 94, 0);"); // Marrón para 5
                     break;
                 case 6:
-                    btn.setStyle("-fx-text-fill: turquoise;"); // Turquesa para 6
+                    btn.setStyle("-fx-text-fill: rgb(255, 0, 251);"); // Turquesa para 6
                     break;
                 case 7:
-                    btn.setStyle("-fx-text-fill: black;"); // Negro para 7
+                    btn.setStyle("-fx-text-fill: rgb(3, 94, 29);"); // Negro para 7
                     break;
                 case 8:
-                    btn.setStyle("-fx-text-fill: gray;"); // Gris para 8
+                    btn.setStyle("-fx-text-fill: rgb(246, 255, 0);"); // Gris para 8
                     break;
             }
         } else {
