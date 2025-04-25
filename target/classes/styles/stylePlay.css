@@ -34,6 +34,38 @@
     -fx-text-fill: #ffffff; /* Blanco */
 }
 
+.button-number-1 {
+    -fx-text-fill: #00b7ff; /* Azul */
+}
+
+.button-number-2 {
+    -fx-text-fill: #00ff40; /* Verde */
+}
+
+.button-number-3 {
+    -fx-text-fill: #ff0000; /* Rojo */
+}
+
+.button-number-4 {
+    -fx-text-fill: #ae00ff; /* Morado */
+}
+
+.button-number-5 {
+    -fx-text-fill: #ff5e00; /* Marrón */
+}
+
+.button-number-6 {
+    -fx-text-fill: #ff00fb; /* Turquesa */
+}
+
+.button-number-7 {
+    -fx-text-fill: #035e1d; /* Negro */
+}
+
+.button-number-8 {
+    -fx-text-fill: #00b7ff; /* Gris */
+}
+
 /* Styles for input fields (TextField and PasswordField) */
 .text-field, .password-field {
     -fx-background-color: #3a3f47; /* Gris oscuro */

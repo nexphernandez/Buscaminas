@@ -187,14 +187,14 @@ public class PlayController extends AbstractController {
         if (descubiertas[fila][columna]) {
             return;
         }
-
+    
         // Marcamos la celda como descubierta
         descubiertas[fila][columna] = true;
-
+    
         // Verificamos si la celda contiene una mina
         if (tablero[fila][columna] == -1) {
             btn.setStyle("-fx-background-color: red;"); // Cambiamos el color para indicar la mina
-        
+    
             // Cargar la imagen de la bomba
             Image bombaImagen = new Image(
                     getClass().getResourceAsStream("/img/bomba.png"));
@@ -202,53 +202,29 @@ public class PlayController extends AbstractController {
             bombaView.setFitWidth(20); // Ajusta el tamaño de la imagen
             bombaView.setFitHeight(20);
             btn.setGraphic(bombaView); // Establece la imagen en el botón
-        
+    
             // Establecer el mensaje de "Has perdido" dinámicamente
             mensajeLabel.setText(ConfigManager.ConfigProperties.getProperty("mensajeLabel"));
-        
+    
             deshabilitarTablero(); // Finalizamos el juego
             return;
         }
-
+    
         // Si no es una mina, mostramos el número de minas adyacentes
         int minasCercanas = tablero[fila][columna];
         if (minasCercanas > 0) {
             btn.setText(String.valueOf(minasCercanas));
             btn.setDisable(true); // Deshabilitamos el botón
-
-            // Cambiar el color del texto según el número
-            switch (minasCercanas) {
-                case 1:
-                    btn.setStyle("-fx-text-fill:rgb(0, 183, 255);"); // Azul para 1
-                    break;
-                case 2:
-                    btn.setStyle("-fx-text-fill: rgb(0, 255, 64);"); // Verde para 2
-                    break;
-                case 3:
-                    btn.setStyle("-fx-text-fill: rgb(255, 0, 0);"); // Rojo para 3
-                    break;
-                case 4:
-                    btn.setStyle("-fx-text-fill: rgb(174, 0, 255);"); // Morado para 4
-                    break;
-                case 5:
-                    btn.setStyle("-fx-text-fill: rgb(255, 94, 0);"); // Marrón para 5
-                    break;
-                case 6:
-                    btn.setStyle("-fx-text-fill: rgb(255, 0, 251);"); // Turquesa para 6
-                    break;
-                case 7:
-                    btn.setStyle("-fx-text-fill: rgb(3, 94, 29);"); // Negro para 7
-                    break;
-                case 8:
-                    btn.setStyle("-fx-text-fill: rgb(0, 183, 255);"); // Gris para 8
-                    break;
-            }
+    
+            // Limpia las clases previas y asigna una clase CSS específica
+            btn.getStyleClass().removeIf(style -> style.startsWith("button-number-"));
+            btn.getStyleClass().add("button-number-" + minasCercanas);
         } else {
             // Descubrimos celdas adyacentes si la celda está vacía
             btn.setDisable(true);
             descubrirAdyacentes(fila, columna);
         }
-
+    
         // Actualizamos el conteo de celdas descubiertas
         celdasDescubiertas++;
         if (celdasDescubiertas == (filas * columnas - minas)) {
@@ -256,7 +232,6 @@ public class PlayController extends AbstractController {
             deshabilitarTablero();
         }
     }
-
     private void descubrirAdyacentes(int fila, int columna) {
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
