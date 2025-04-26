@@ -47,12 +47,19 @@ public class PlayController extends AbstractController {
         crearTablero(filas, columnas);
         cambiarIdiomaPlay();
 
-        // Aplica el archivo CSS dinámicamente
+
         if (grid.getScene() != null) {
-            grid.getScene().getStylesheets().add(getClass().getResource("/styles/stylePlay.css").toExternalForm());
+            grid.getScene().getStylesheets().add(getClass().getResource("@../styles/stylePlay.css").toExternalForm());
         }
     }
 
+    /**
+     * Configura la partida con el número de filas, columnas y minas.
+     *
+     * @param filas    Número de filas del tablero.
+     * @param columnas Número de columnas del tablero.
+     * @param minas    Número de minas en el tablero.
+     */
     public void configurarPartida(int filas, int columnas, int minas) {
         this.filas = filas;
         this.columnas = columnas;
@@ -63,36 +70,45 @@ public class PlayController extends AbstractController {
         Platform.runLater(() -> ajustarTamañoVentana());
     }
 
+    /**
+     * Ajusta el tamaño de la ventana del juego según el número de filas y columnas.
+     */
     private void ajustarTamañoVentana() {
-        // Tamaño de cada celda
+        
         int tamañoCelda = 30;
-
-        // Calcular tamaño total del GridPane
         int anchoGrid = columnas * tamañoCelda;
         int altoGrid = filas * tamañoCelda;
-
-        // Ajustar el tamaño del GridPane
         grid.setPrefSize(anchoGrid, altoGrid);
 
-        // Obtener el Stage desde el GridPane
         Stage stage = (Stage) grid.getScene().getWindow();
 
-        // Ajustar el tamaño del Stage
-        stage.setWidth(anchoGrid + 100); // +100 para márgenes adicionales
-        stage.setHeight(altoGrid + 250); // +150 para botones, etiquetas, etc.
+        stage.setWidth(anchoGrid + 100); 
+        stage.setHeight(altoGrid + 250); 
     }
 
+    /**
+     * Reinicia el juego y limpia el mensaje de la etiqueta.
+     */
     @FXML
     void nuevoJuego() {
-        mensajeLabel.setText(""); // Limpia el mensaje
-        crearTablero(filas, columnas); // Reinicia el tablero
+        mensajeLabel.setText(""); 
+        crearTablero(filas, columnas);
     }
 
+    /**
+     * Cambia a la pantalla de inicio.
+     */
     @FXML
     protected void onAtrasClick() {
         cambiarPantalla(atrasButon, "inicio", "play");
     }
 
+    /**
+     * Crea el tablero del juego con el número de filas y columnas especificadas.
+     *
+     * @param filas    Número de filas del tablero.
+     * @param columnas Número de columnas del tablero.
+     */
     private void crearTablero(int filas, int columnas) {
         grid.getChildren().clear();
         tablero = new int[filas][columnas];
@@ -105,17 +121,17 @@ public class PlayController extends AbstractController {
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
                 Button btn = new Button();
-                btn.setPrefSize(30, 30); // Tamaño fijo para cada celda
-                btn.setMinSize(30, 30); // Tamaño mínimo
-                btn.setMaxSize(30, 30); // Tamaño máximo
+                btn.setPrefSize(30, 30); 
+                btn.setMinSize(30, 30); 
+                btn.setMaxSize(30, 30); 
                 final int fila = i;
                 final int columna = j;
 
-                // Manejar clics del mouse
+                
                 btn.setOnMouseClicked(e -> {
-                    if (e.getButton().name().equals("PRIMARY")) { // Clic izquierdo
+                    if (e.getButton().name().equals("PRIMARY")) { 
                         manejarBoton(btn, fila, columna);
-                    } else if (e.getButton().name().equals("SECONDARY")) { // Clic derecho
+                    } else if (e.getButton().name().equals("SECONDARY")) { 
                         colocarBandera(btn, fila, columna);
                     }
                 });
@@ -124,30 +140,39 @@ public class PlayController extends AbstractController {
             }
         }
 
-        // Establecer alineación del GridPane
+       
         grid.setAlignment(Pos.CENTER);
     }
 
+    /**
+     * Coloca o quita una bandera en la celda seleccionada.
+     *
+     * @param btn     Botón que representa la celda.
+     * @param fila    Fila de la celda.
+     * @param columna Columna de la celda.
+     */
     private void colocarBandera(Button btn, int fila, int columna) {
-        // Si la celda ya está descubierta, no hacemos nada
         if (descubiertas[fila][columna]) {
             return;
         }
 
-        // Alternar entre colocar y quitar la bandera
         if (btn.getGraphic() == null) {
-            // Cargar la imagen de la banderita
             Image banderaImagen = new Image(
                     getClass().getResourceAsStream("/img/bandera.png"));
             ImageView banderaView = new ImageView(banderaImagen);
-            banderaView.setFitWidth(20); // Ajusta el tamaño de la imagen
+            banderaView.setFitWidth(20); 
             banderaView.setFitHeight(20);
-            btn.setGraphic(banderaView); // Colocar la banderita
+            btn.setGraphic(banderaView); 
         } else {
-            btn.setGraphic(null); // Quitar la banderita
+            btn.setGraphic(null); 
         }
     }
 
+    /**
+     * Coloca minas aleatoriamente en el tablero.
+     *
+     * @param cantidadMinas Número de minas a colocar.
+     */
     private void colocarMinas(int cantidadMinas) {
         Random random = new Random();
         for (int i = 0; i < cantidadMinas; i++) {
@@ -161,6 +186,9 @@ public class PlayController extends AbstractController {
         }
     }
 
+    /**
+     * Cuenta el número de minas adyacentes a cada celda del tablero.
+     */
     private void contarMinasAlrededor() {
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
@@ -187,50 +215,48 @@ public class PlayController extends AbstractController {
         }
     }
 
+    /**
+     * Maneja el clic en un botón del tablero.
+     *
+     * @param btn     Botón que representa la celda.
+     * @param fila    Fila de la celda.
+     * @param columna Columna de la celda.
+     */
     private void manejarBoton(Button btn, int fila, int columna) {
-        // Si la celda ya fue descubierta, no hacemos nada
         if (descubiertas[fila][columna]) {
             return;
         }
 
-        // Marcamos la celda como descubierta
         descubiertas[fila][columna] = true;
 
-        // Verificamos si la celda contiene una mina
         if (tablero[fila][columna] == -1) {
-            btn.setStyle("-fx-background-color: red;"); // Cambiamos el color para indicar la mina
+            btn.setStyle("-fx-background-color: red;"); 
 
-            // Cargar la imagen de la bomba
             Image bombaImagen = new Image(
                     getClass().getResourceAsStream("/img/bomba.png"));
             ImageView bombaView = new ImageView(bombaImagen);
-            bombaView.setFitWidth(20); // Ajusta el tamaño de la imagen
+            bombaView.setFitWidth(20); 
             bombaView.setFitHeight(20);
-            btn.setGraphic(bombaView); // Establece la imagen en el botón
+            btn.setGraphic(bombaView); 
 
-            // Establecer el mensaje de "Has perdido" dinámicamente
             mensajeLabel.setText(ConfigManager.ConfigProperties.getProperty("mensajeLabel"));
 
-            deshabilitarTablero(); // Finalizamos el juego
+            deshabilitarTablero(); 
             return;
         }
 
-        // Si no es una mina, mostramos el número de minas adyacentes
         int minasCercanas = tablero[fila][columna];
         if (minasCercanas > 0) {
             btn.setText(String.valueOf(minasCercanas));
-            btn.setDisable(true); // Deshabilitamos el botón
+            btn.setDisable(true); 
 
-            // Limpia las clases previas y asigna una clase CSS específica
             btn.getStyleClass().removeIf(style -> style.startsWith("button-number-"));
             btn.getStyleClass().add("button-number-" + minasCercanas);
         } else {
-            // Descubrimos celdas adyacentes si la celda está vacía
             btn.setDisable(true);
             descubrirAdyacentes(fila, columna);
         }
 
-        // Actualizamos el conteo de celdas descubiertas
         celdasDescubiertas++;
         if (celdasDescubiertas == (filas * columnas - minas)) {
             mensajeLabel.setText("¡Felicidades, has ganado!");
@@ -238,17 +264,21 @@ public class PlayController extends AbstractController {
         }
     }
 
+    /**
+     * Descubre las celdas adyacentes a la celda seleccionada.
+     *
+     * @param fila    Fila de la celda seleccionada.
+     * @param columna Columna de la celda seleccionada.
+     */
     private void descubrirAdyacentes(int fila, int columna) {
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
-                // Ignoramos la celda actual
                 if (i == 0 && j == 0)
                     continue;
 
                 int nuevaFila = fila + i;
                 int nuevaColumna = columna + j;
 
-                // Validamos que la celda esté dentro del tablero
                 if (nuevaFila >= 0 && nuevaFila < filas && nuevaColumna >= 0 && nuevaColumna < columnas) {
                     if (!descubiertas[nuevaFila][nuevaColumna]) {
                         Button btn = (Button) getNodeFromGridPane(grid, nuevaFila, nuevaColumna);
@@ -259,6 +289,9 @@ public class PlayController extends AbstractController {
         }
     }
 
+    /**
+     * Deshabilita todos los botones del tablero.
+     */
     private void deshabilitarTablero() {
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
@@ -268,6 +301,14 @@ public class PlayController extends AbstractController {
         }
     }
 
+    /**
+     * Obtiene un nodo específico del GridPane según su fila y columna.
+     *
+     * @param gridPane El GridPane del que se desea obtener el nodo.
+     * @param fila     La fila del nodo.
+     * @param columna  La columna del nodo.
+     * @return El nodo correspondiente a la fila y columna especificadas, o null si no se encuentra.
+     */
     private Node getNodeFromGridPane(GridPane gridPane, int fila, int columna) {
         for (Node node : gridPane.getChildren()) {
             if (GridPane.getRowIndex(node) == fila && GridPane.getColumnIndex(node) == columna) {
@@ -284,7 +325,6 @@ public class PlayController extends AbstractController {
         nuevoJuegoBtn.setText(ConfigManager.ConfigProperties.getProperty("nuevoJuegoBtn"));
         atrasButon.setText(ConfigManager.ConfigProperties.getProperty("atrasButon"));
 
-        // Si el mensajeLabel no está vacío, actualízalo con el mensaje traducido
         if (!mensajeLabel.getText().isEmpty()) {
             mensajeLabel.setText(ConfigManager.ConfigProperties.getProperty("mensajeLabel"));
         }

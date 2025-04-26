@@ -46,18 +46,14 @@ public class InicioController extends AbstractController {
 
     @FXML
     public void initialize() {
-        // Configurar las opciones del ComboBox de dificultad desde el archivo de idioma
         dificultadComboBox.getItems().clear();
         dificultadComboBox.getItems().addAll(
                 ConfigManager.ConfigProperties.getProperty("dificultadFacil"),
                 ConfigManager.ConfigProperties.getProperty("dificultadMedia"),
                 ConfigManager.ConfigProperties.getProperty("dificultadDificil"),
-                "Personalizada" // Personalizada no necesita traducción
-        );
-        dificultadComboBox.setValue(ConfigManager.ConfigProperties.getProperty("dificultadFacil")); // Valor
-                                                                                                    // predeterminado
+                ConfigManager.ConfigProperties.getProperty("Personalizada"));
+        dificultadComboBox.setValue(ConfigManager.ConfigProperties.getProperty("dificultadFacil"));
 
-        // Configurar el comportamiento inicial
         onDificultadChange();
         cambiarIdiomaInicio();
     }
@@ -67,7 +63,7 @@ public class InicioController extends AbstractController {
      */
     @FXML
     private void onDificultadChange() {
-        String seleccion = (String) dificultadComboBox.getValue();
+        String seleccion = dificultadComboBox.getValue();
         boolean personalizada = "Personalizada".equals(seleccion);
         filasText.setDisable(!personalizada);
         columnasText.setDisable(!personalizada);
@@ -83,32 +79,32 @@ public class InicioController extends AbstractController {
      */
     @FXML
     private void inicioToPartidaOnClick() {
-        String seleccion = dificultadComboBox.getValue(); // Obtén la dificultad seleccionada
+        String seleccion = dificultadComboBox.getValue();
         int filas = 0;
         int columnas = 0;
         int minas = 0;
 
-        switch (seleccion) {
-            case "Fácil":
-            case "Easy": // Traducción al inglés
-                filas = 8;
-                columnas = 8;
-                minas = 10;
-                break;
-            case "Media":
-            case "Medium": // Traducción al inglés
-                filas = 12;
-                columnas = 12;
-                minas = 20;
-                break;
-            case "Difícil":
-            case "Hard": // Traducción al inglés
-                filas = 16;
-                columnas = 16;
-                minas = 40;
-                break;
-            case "Personalizada":
-                try {
+        try {
+            switch (seleccion) {
+                case "Fácil":
+                case "Easy":
+                    filas = 8;
+                    columnas = 8;
+                    minas = 10;
+                    break;
+                case "Media":
+                case "Medium":
+                    filas = 12;
+                    columnas = 12;
+                    minas = 20;
+                    break;
+                case "Difícil":
+                case "Hard":
+                    filas = 16;
+                    columnas = 16;
+                    minas = 40;
+                    break;
+                case "Personalizada":
                     filas = Integer.parseInt(filasField.getText());
                     columnas = Integer.parseInt(columnasField.getText());
                     minas = Integer.parseInt(minasField.getText());
@@ -117,26 +113,25 @@ public class InicioController extends AbstractController {
                         mensajeError("Valores inválidos. Asegúrate de que haya al menos 1 mina y espacio suficiente.");
                         return;
                     }
-                } catch (NumberFormatException e) {
-                    mensajeError("Introduce valores numéricos válidos.");
+                    break;
+                default:
+                    mensajeError("Selecciona una dificultad.");
                     return;
-                }
-                break;
-            default:
-                mensajeError("Selecciona una dificultad.");
-                return;
+            }
+        } catch (NumberFormatException e) {
+            mensajeError("Introduce valores numéricos válidos.");
+            return;
         }
 
-        // Cambiar a la pantalla de juego pasando las configuraciones
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/play.fxml"));
         try {
             Stage stage = (Stage) jugarButton.getScene().getWindow();
             Scene scene = new Scene(loader.load());
             PlayController playController = loader.getController();
-            playController.configurarPartida(filas, columnas, minas); // Pasar configuraciones
+            playController.configurarPartida(filas, columnas, minas);
             stage.setScene(scene);
             stage.sizeToScene();
-            stage.show(); // Asegurarse de que el Stage esté visible
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -158,12 +153,12 @@ public class InicioController extends AbstractController {
         jugarButton.setText(ConfigManager.ConfigProperties.getProperty("jugarButton"));
         regresarButton.setText(ConfigManager.ConfigProperties.getProperty("regresarButton"));
 
-        // Actualizar las opciones del ComboBox de dificultad
         dificultadComboBox.getItems().clear();
         dificultadComboBox.getItems().addAll(
                 ConfigManager.ConfigProperties.getProperty("dificultadFacil"),
                 ConfigManager.ConfigProperties.getProperty("dificultadMedia"),
-                ConfigManager.ConfigProperties.getProperty("dificultadDificil"));
+                ConfigManager.ConfigProperties.getProperty("dificultadDificil"),
+                ConfigManager.ConfigProperties.getProperty("Personalizada"));
         dificultadComboBox.setPromptText(ConfigManager.ConfigProperties.getProperty("dificultadBoxPrompt"));
     }
 }

@@ -143,11 +143,11 @@ public class UsuarioServiceModel extends Conexion {
     }
 
     /**
-     * modifica la base de datos segun el sql insertado
+     * Ejecuta la sentencia sql de update
      * 
-     * @param sql
-     * @param usuario
-     * @return
+     * @param sql a ejecutar
+     * @param usuario a agregar
+     * @return true/false
      * @throws SQLException
      */
     public boolean ejecutarUpdate(String sql, UsuarioEntity usuario) throws SQLException {
@@ -166,6 +166,12 @@ public class UsuarioServiceModel extends Conexion {
         }
     }
 
+    /**
+     * elimina un usuario de la base de datos
+     * @param sql a ejecutar
+     * @return true si se eliminó, false en caso contrario
+     * @throws SQLException 
+     */
     public boolean eliminar(String sql) throws SQLException{
         try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
             int filas = stmt.executeUpdate(sql);
